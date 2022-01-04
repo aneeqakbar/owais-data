@@ -1,0 +1,357 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block ExtraCss %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ti-icons@0.1.2/css/themify-icons.css">
+
+<style>
+.icon-box.medium {
+    font-size: 20px;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+}
+.icon-box {
+    font-size: 30px;
+    margin-bottom: 33px;
+    display: inline-block;
+    color: #ffffff;
+    height: 65px;
+    width: 65px;
+    line-height: 65px;
+    background-color: var(--temp-primary);
+    text-align: center;
+    border-radius: 0.3rem;
+}
+.social-icon-style2 li a {
+    display: inline-block;
+    font-size: 14px;
+    text-align: center;
+    color: #ffffff;
+    background-color: var(--temp-primary);
+    height: 41px;
+    line-height: 41px;
+    width: 41px;
+}
+.rounded-3 {
+    border-radius: 0.3rem !important;
+}
+
+.social-icon-style2 {
+    margin-bottom: 0;
+    display: inline-block;
+    padding-left: 10px;
+    list-style: none;
+}
+
+.social-icon-style2 li {
+    vertical-align: middle;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+a, a:active, a:focus {
+    color: #616161;
+    text-decoration: none;
+    transition-timing-function: ease-in-out;
+    -ms-transition-timing-function: ease-in-out;
+    -moz-transition-timing-function: ease-in-out;
+    -webkit-transition-timing-function: ease-in-out;
+    -o-transition-timing-function: ease-in-out;
+    transition-duration: .2s;
+    -ms-transition-duration: .2s;
+    -moz-transition-duration: .2s;
+    -webkit-transition-duration: .2s;
+    -o-transition-duration: .2s;
+}
+
+.text-secondary, .text-secondary-hover:hover {
+    color: var(--temp-primary) !important;
+}
+.display-25 {
+    font-size: 1.4rem;
+}
+
+.text-primary, .text-primary-hover:hover {
+    color: var(--temp-primary) !important;
+}
+
+p {
+    margin: 0 0 20px;
+}
+
+.mb-1-6, .my-1-6 {
+    margin-bottom: 1.6rem;
+}
+</style>
+<style>
+    .text-secondary-d1 {
+        color: var(--temp-primary)!important;
+    }
+    .page-header {
+        margin: 0 0 1rem;
+        padding-bottom: 1rem;
+        padding-top: .5rem;
+        border-bottom: 1px dotted #e2e2e2;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -ms-flex-align: center;
+        align-items: center;
+    }
+    .page-title {
+        padding: 0;
+        margin: 0;
+        font-size: 1.75rem;
+        font-weight: 300;
+    }
+    .brc-default-l1 {
+        border-color: #dce9f0!important;
+    }
+
+    .ml-n1, .mx-n1 {
+        margin-left: -.25rem!important;
+    }
+    .mr-n1, .mx-n1 {
+        margin-right: -.25rem!important;
+    }
+    .mb-4, .my-4 {
+        margin-bottom: 1.5rem!important;
+    }
+
+    hr {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        border: 0;
+        border-top: 1px solid rgba(0,0,0,.1);
+    }
+
+    .text-grey-m2 {
+        color: #888a8d!important;
+    }
+
+    .text-success-m2 {
+        color: #86bd68!important;
+    }
+
+    .font-bolder, .text-600 {
+        font-weight: 600!important;
+    }
+
+    .text-110 {
+        font-size: 110%!important;
+    }
+    .text-blue {
+        color: #478fcc!important;
+    }
+    .pb-25, .py-25 {
+        padding-bottom: .75rem!important;
+    }
+
+    .pt-25, .py-25 {
+        padding-top: .75rem!important;
+    }
+    .bgc-default-tp1 {
+        background-color: var(--temp-primary) !important;
+    }
+    .bgc-default-l4, .bgc-h-default-l4:hover {
+        background-color: #f3f8fa!important;
+    }
+    .page-header .page-tools {
+        -ms-flex-item-align: end;
+        align-self: flex-end;
+    }
+
+    .btn-light {
+        color: #757984;
+        background-color: #f5f6f9;
+        border-color: #dddfe4;
+    }
+    .w-2 {
+        width: 1rem;
+    }
+
+    .text-120 {
+        font-size: 120%!important;
+    }
+    .text-primary-m1 {
+        color: #4087d4!important;
+    }
+
+    .text-danger-m1 {
+        color: #dd4949!important;
+    }
+    .text-blue-m2 {
+        color: #68a3d5!important;
+    }
+    .text-150 {
+        font-size: 150%!important;
+    }
+    .text-60 {
+        font-size: 60%!important;
+    }
+    .text-grey-m1 {
+        color: #7b7d81!important;
+    }
+    .align-bottom {
+        vertical-align: bottom!important;
+    }
+</style>
+<style>
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+</style>
+{% endblock ExtraCss %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-4 mb-5 mb-lg-0 wow fadeIn">
+            <div class="card border-0 shadow">
+                <img src="/static/images/profile.png" alt="Profile Pic">
+                <div class="card-body p-1-9 p-xl-5">
+                    <div class="mb-4">
+                        <h3 class="h4 mb-0">{{request.user.username|capfirst}}</h3>
+                        <span class="text-primary">{% if request.user.is_staff %}Admin{% else %}Member{% endif %}</span>
+                    </div>
+                    <ul class="list-unstyled mb-2">
+                        {% if request.user.email %}
+                            <li class="mb-3"><a href="#!"><i class="far fa-envelope display-25 me-3 text-secondary"></i>{{request.user.email}}</a></li>
+                        {% endif %}
+                    </ul>
+
+                    <ul class="list-unstyled mb-2 mt-4">
+                        <li class="border border-light bg-primary p-2"><a class="a_no_style" href="{% url 'core:ManageScrapperView' %}">Manage Scrappers</a></li>
+                        <li class="border border-light bg-light p-2"><a class="a_no_style" href="{% url 'core:ManageUserView' %}">Manage Users</a></li>
+                    </ul>
+
+                    {% comment %} <ul class="social-icon-style2 ps-0">
+                        <li><a href="#!" class="rounded-3"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="#!" class="rounded-3"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#!" class="rounded-3"><i class="fab fa-youtube"></i></a></li>
+                        <li><a href="#!" class="rounded-3"><i class="fab fa-linkedin-in"></i></a></li>
+                    </ul> {% endcomment %}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="ps-lg-1-6 ps-xl-5">
+                <div class="page-content container">
+                    <div class="px-0">
+                        <div class="row mt-4">
+
+                            <div class="row">
+                                <h1 class="text-center">Manage Scrappers</h1>
+                            </div>
+
+                            <div class="table-responsive mt-4">
+                                <table class="table table-striped table-borderless border-0 border-b-2 brc-default-l1">
+                                    <thead class="bg-none bgc-default-tp1">
+                                        <tr class="text-white">
+                                            <th class="opacity-2">#</th>
+                                            <th>Name</th>
+                                            <th>Active</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody class="text-95 text-secondary-d3">
+                                        <tr></tr>
+                                        {% for scrapper in scrappers %}
+                                            <tr>
+                                                <td>{{scrapper.pk}}</td>
+                                                <td>{{scrapper.name}}</td>
+                                                <td class="form-check form-switch">
+                                                    {% comment %} <input class="form-check-input" type="checkbox" {% if scrapper.active %} checked {% endif %}> {% endcomment %}
+                                                    <label class="switch">
+                                                        <input name="scrapper_check" data-owner="{{scrapper.owner}}" data-url="{% url 'core:ToggleScrapperView' %}" type="checkbox" {% if scrapper.active %} checked {% endif %}>
+                                                        <span class="slider round"></span>
+                                                    </label>
+                                                </td>
+                                            </tr> 
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <hr />
+
+                            {% comment %} <div>
+                                <span class="text-secondary-d1 text-105">Thank you for your business</span>
+                                <a href="#" class="btn btn-info btn-bold px-4 float-right mt-3 mt-lg-0">Pay Now</a>
+                            </div> {% endcomment %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block ExtraJs %}
+<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'js/infinite.min.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+<script src="{% static 'js/admin.js' %}"></script>
+{% endblock ExtraJs %}

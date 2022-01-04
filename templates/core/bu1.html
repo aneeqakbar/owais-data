@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block ExtraCss %}
+<style>
+  .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+      background-color: #8064A2 !important;
+  }
+</style>
+{% endblock ExtraCss %}
+
+{% block content %}
+<div class="filters-cont row mb-4">
+  {% comment %} <div class="col-12 text-center">
+    <button class="btn btn-warning text-light" onclick="handleFilters(this, true)" data-param="price" data-append="true" data-value="high">Price High</button>
+    <button class="btn btn-warning text-light" onclick="handleFilters(this, true)" data-param="price" data-append="true" data-value="medium">Price Medium</button>
+    <button class="btn btn-warning text-light" onclick="handleFilters(this, true)" data-param="price" data-append="true" data-value="low">Price Low</button>
+  </div> {% endcomment %}
+</div>
+<div class="container">
+    <div class="container-fluid">
+      <form class="form-inline d-flex justify-content-center md-form form-sm" id="search-form" data-param="query" data-append="false">
+        <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search" aria-label="Search" name="query">
+          <button type="submit" class="btn_no_style"><i class="fas fa-search" aria-hidden="true"></i></button>
+      </form>
+      <h2 >Filter <b>Products</b></h2>
+      <div class="row">
+        <p class="col-12 fs-4 lead">Results ({{all_count}})</p>
+      </div>
+      <div class="row">
+        <div class="col-lg mx-auto">
+            <ul class="list-group shadow infinite-container" style="margin-bottom: 80px;">
+                {% for product in products %}
+                  <li class="list-group-item infinite-item">
+                      <div class="media align-items-lg-center flex-column flex-lg-row p-1">
+                          <div class="media-body col-9">
+                            <div class="row align-items-center">
+                              <div class="col-12">
+                                <h5 class="font-weight-bold mt-3 mb-2"><a href="{{product.product_url}}" class="a_no_style" target="_blank">{{product.title}}</a></h5>
+                                <p class="font-italic text-muted mb-0 small">{{product.get_exerpt}}</p>
+                              </div>
+                            </div>
+                            <div class="row mt-2">
+                              <div class="col-3">
+                                <div class="row">
+                                  <h6 class="font-weight-bold my-2 col">Retail Price: ${{product.price}}</h6>
+                                </div>
+                                <div class="row">
+                                  <h6 class="font-weight-bold my-2 col-4 text-danger">${{product.get_high_price}}</h6>
+                                  <h6 class="font-weight-bold my-2 col-4 text-warning">${{product.get_medium_price}}</h6>
+                                  <h6 class="font-weight-bold my-2 col-4 text-success">${{product.get_low_price}}</h6>
+                                </div>
+                                {% comment %} {% if set_price == "high" %}
+                                  <h6 class="font-weight-bold my-2"><s class="text-danger">${{product.price}}</s> ${{product.get_high_price}}</h6>
+                                {% elif set_price == "medium" %}
+                                  <h6 class="font-weight-bold my-2"><s class="text-danger">${{product.price}}</s> ${{product.get_medium_price}}</h6>
+                                {% elif set_price == "low" %}
+                                  <h6 class="font-weight-bold my-2"><s class="text-danger">${{product.price}}</s> ${{product.get_low_price}}</h6>
+                                {% else %}
+                                  <h6 class="font-weight-bold my-2">${{product.price}}</h6>
+                                {% endif %} {% endcomment %}
+                              </div>
+
+                              {% comment %} <div class="col-4 d-flex justify-content-center align-center">
+                                {% if product.owner == "Aritzia" %}
+                                  <div class="owner-status d-inline" style="background-color: #881BB5;"><strong>{{product.owner}}</strong></div>
+                                {% elif product.owner == "Lululemon" %}
+                                  <div class="owner-status d-inline" style="background-color: #1B81B8;"><strong>{{product.owner}}</strong></div>
+                                {% elif product.owner == "" %}
+                                {% endif %}
+                              </div> {% endcomment %}
+
+                              {% comment %} <div class="col-4 d-flex justify-content-end align-center">
+                                {% if product.stock_status %}
+                                  <div class="stock-status d-inline" style="background-color: green;"><strong>In Stock</strong></div>
+                                {% else %}
+                                  <div class="stock-status d-inline" style="background-color: red;"><strong>Out of Stock</strong></div>
+                                {% endif %}
+                              </div> {% endcomment %}
+                            </div>
+                          </div>
+                          {% if product.owner == "aritzia" %}
+                            <img class="col-3" src="https://www.aritzia.com/on/demandware.static/Sites-Aritzia_INTL-Site/-/default/dw29c878d3/images/aritzia_skin/aritzia_logo.svg" alt="Aritzia" style="">
+                          {% elif product.owner == "lululemon" %}
+                            <svg viewBox="0 0 27 27" xmlns="http://www.w3.org/2000/svg" width="100" height="100" class="col-3"><path d="M13.499 0C20.956 0 27 6.045 27 13.5 27 20.957 20.956 27 13.499 27 6.044 27 0 20.958 0 13.5 0 6.044 6.044 0 13.499 0zm7.076 20.18c-.425 0-.825-.127-1.22-.391-2.184-1.454-1.438-3.198.053-5.897.63-1.145 1.282-2.324 1.572-3.542.311-1.31.594-3.22-.542-4.664-.534-.677-1.347-1.2-2.413-1.554-1.112-.367-2.54-.566-4.25-.589l-.118-.003-.434.003c-1.709.023-3.139.222-4.248.589-1.068.354-1.88.876-2.415 1.554-1.136 1.445-.853 3.354-.54 4.664.288 1.218.941 2.4 1.57 3.541 1.491 2.7 2.238 4.444.052 5.898-.394.264-.792.39-1.218.39-.85 0-1.83-.425-2.352-.685l.127.223c1.08 1.621 2.468 2.483 4.01 2.483.676 0 1.39-.164 2.12-.488.775-.343 1.455-.971 1.917-1.769.46-.798.643-1.657.512-2.421-.158-.685-.516-1.606-.927-2.673-1.077-2.783-2.548-6.588-1.278-8.449.536-.785 1.5-1.169 2.945-1.174 1.447.005 2.41.389 2.946 1.174 1.272 1.861-.2 5.666-1.275 8.445-.413 1.068-.77 1.99-.928 2.67-.132.771.05 1.63.512 2.428s1.142 1.426 1.917 1.77c.73.323 1.444.487 2.12.487 1.542 0 2.93-.862 4.015-2.49l.122-.216c-.52.26-1.5.686-2.352.686z" id="Combined-Shape" fill-rule="nonzero" fill="#d31334"></path></svg>
+                          {% elif product.owner == "anthropologie" %}
+                            <img class="col-3" src="https://images.ctfassets.net/5de70he6op10/4ZrgvwZk7dhamiSvXf9PJY/10269715f60f294c463cf63a903e6575/Anthropologie_TypeLogo_gold__1_.png" alt="Aritzia" style="">
+                          {% endif %}
+                      </div> 
+                  </li>
+                {% endfor %}
+            </ul>
+          {% if count == 0 %}
+            <h2>No Result Found</h2>
+          {% endif %}
+          {% if products.has_next %}
+              <a class="infinite-more-link" href="?page={{products.next_page_number}}"></a>
+              <div class="loader spinner-border text-info" role="status">
+                  <span class="visually-hidden">Loading...</span>
+              </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+</div>
+<div id="message-area" class="hidden">
+  <p id="text-content" class="fs-6 lead">Notification</p>
+</div>
+{% endblock content %}
+
+{% block ExtraJs %}
+
+<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'js/infinite.min.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+
+<script>
+  function closeParent(elem) {
+    elem.parentElement.classList.toggle("show", false);
+    elem.parentElement.classList.toggle("hidden", true);
+  }
+  function openElem(class_name) {
+    document.querySelector(class_name).classList.toggle("show", true);
+    document.querySelector(class_name).classList.toggle("hidden", false);
+  }
+
+  let to = null;
+  function popUp(msg) {
+    if (to) {
+      clearTimeout(to);
+    }
+    const message_area = document.getElementById("message-area");
+    message_area.classList.toggle("hidden", true);
+    message_area.querySelector("#text-content").innerText = msg;
+    setTimeout(() => {
+      message_area.classList.toggle("hidden", false);
+    }, 200);
+    to = setTimeout(() => {
+      message_area.classList.toggle("hidden", true);
+    }, 2000);
+  }
+</script>
+{% endblock ExtraJs %}

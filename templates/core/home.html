@@ -1,0 +1,242 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block ExtraCss %}
+<style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    #myInput {
+      background-image: url('/css/searchicon.png');
+      background-position: 10px 10px;
+      background-repeat: no-repeat;
+      width: 100%;
+      font-size: 16px;
+      padding: 12px 20px 12px 40px;
+      border: 1px solid #ddd;
+      margin-bottom: 12px;
+    }
+    
+    #myTable {
+      border-collapse: collapse;
+      width: 100%;
+      border: 1px solid #ddd;
+      font-size: 18px;
+    }
+    
+    #myTable th, #myTable td {
+      text-align: left;
+      padding: 12px;
+    }
+    
+    #myTable tr {
+      border-bottom: 1px solid #ddd;
+    }
+    
+    #myTable tr.header, #myTable tr:hover {
+      background-color: #f1f1f1;
+    }
+</style>
+{% endblock ExtraCss %}
+
+{% block content %}
+
+
+
+<div>
+    <div class="row">
+        {% comment %} <div class="sidebar-cont col-lg-3 col-3">
+            <div class="sidebar">
+                <div class="sidebar-item fs-5 lead close-sidebar">
+                    <i class="fas fa-filter fs-6 me-2"></i> Filter
+                </div>
+                <div class="sidebar-item fs-5 lead open-sidebar hidden"></div>
+                <div class="accordion accordion-flush" id="statusAccordion">
+                    <div class="accordion-item" id="statusAccordion">
+                        <h2 class="accordion-header" id="flush-headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                Status
+                            </button>
+                        </h2>
+                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#statusAccordion">
+                        <div class="accordion-body">
+                            <button class="btn btn-light" onclick="handleFilters(this)" data-value="B" data-param="status">Buy Now</button>
+                            <button class="btn btn-light" onclick="handleFilters(this)" data-value="A" data-param="status">On Auction</button>
+                            <button class="btn btn-light" onclick="handleFilters(this)" data-value="all" data-param="status">All</button>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item" id="priceAccordion">
+                        <h2 class="accordion-header" id="flush-headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                            Price
+                        </button>
+                        </h2>
+                        <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#priceAccordion">
+                        <div class="accordion-body">
+                            <div class="input-group mb-3">
+                                <input type="number" class="form-control" placeholder="Min" aria-label="Min" min="0" step="any" onchange="handleFilters(this)" data-param="from_price">
+                                <span class="input-group-text">To</span>
+                                <input type="number" class="form-control" placeholder="Max" aria-label="Max" min="0" step="any" onchange="handleFilters(this)" data-param="to_price">
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item" id="priceAccordion">
+                        <h2 class="accordion-header" id="flush-headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                            Rarity
+                        </button>
+                        </h2>
+                        <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#priceAccordion">
+                        <div class="accordion-body">
+                            <div class="input-group mb-3">
+                                <input type="number" class="form-control" placeholder="Min" aria-label="Min" min="0" step="any" onchange="handleFilters(this)" data-param="from_rarity">
+                                <span class="input-group-text">To</span>
+                                <input type="number" class="form-control" placeholder="Max" aria-label="Max" min="0" step="any" onchange="handleFilters(this)" data-param="to_rarity">
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary w-50 mt-5" onclick="refreshPage(this)">Apply</button>
+                </div>
+            </div>
+            <button class="close-btn btn hidden" onclick="closeParent(this)">X</button>
+        </div> {% endcomment %}
+        <button class="open-btn btn btn-primary btn-small hidden" onclick="openElem('.sidebar-cont')">Filter</button>
+        <div class="col">
+            {% comment %} <div class="row my-4 px-3">
+                <div class="col-12">
+                    <form class="form-inline ms-auto" style="width:fit-content;">
+                        <div class="form-group mb-0 ">
+                            <label class="me-2">Sort by :</label>
+                            <div class="sort-by">
+                                <select class="form-control basic-select" aria-hidden="true" id="sort-price-select" onchange="handleFilters(this,true)" data-param="sort" data-append="false">
+                                    <option value="none">--</option>
+                                    <option value="price_high">Price High</option>
+                                    <option value="price_low">Price Low</option>
+                                    <option value="rarity_low" selected>Rarity</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div> {% endcomment %}
+                <div class="col mt-5">
+
+                    <table id="myTable" class="tablemanager">
+                        <thead>
+                            <tr class="header">
+                                <th class="disableSort">Cryptocurrency</th>
+                                <th class="disableSort">Ticker</th>
+                                <th>Yesterday Total</th>
+                                <th>Today Total</th>
+                                <th>Difference</th>
+                                <th>Yesterday Icospeaks</th>
+                                <th>Today Icospeaks</th>
+                                <th>Yesterday Cryptocom</th>
+                                <th>Today Cryptocom</th>
+                                <th>Yesterday Coinmarket</th>
+                                <th>Today Coinmarket</th>
+                                <th class="disableSort">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for entry in data %}
+                            <tr>
+                                <td>{{entry.cryptocurrency}}</td>
+                                <td>{{entry.ticker}}</td>
+                                <td>{{entry.yesterday_total}}</td>
+                                <td>{{entry.today_total}}</td>
+                                <td>{{entry.difference}}</td>
+                                <td>{{entry.yesterday_icospeaks}}</td>
+                                <td>{{entry.today_icospeaks}}</td>
+                                <td>{{entry.yesterday_cryptocom}}</td>
+                                <td>{{entry.today_cryptocom}}</td>
+                                <td>{{entry.yesterday_coinmarket}}</td>
+                                <td>{{entry.today_coinmarket}}</td>
+                                <td>{{entry.date.date}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+  
+                </div>
+            </div>
+
+
+
+            <div class="row mx-3 my-2" id="filter-applied-cont"></div>
+
+
+            <div class="px-3 infinite-container">
+                <div class="row items-cont">
+                    {% if count == 0 %}
+                    <p class="fs-3 lead">No Result found</p>
+                    {% else %}
+                        {% for nft in nfts %}
+                            <div class="product-card col-lg-3 col-md-4 col-sm-6 infinite-item">
+                                <div class="candidate-list candidate-grid">
+                                    <div class="candidate-list-image">
+                                        <img class="img-fluid" src="{{nft.image_url}}" alt="" loading="lazy">
+                                    </div>
+                                    <div class="candidate-list-details">
+                                        <div class="candidate-list-info mt-4">
+                                            <div class="candidate-list-option">
+                                                <ul class="list-unstyled">
+                                                    <li class="fs-4 lead"><a class="a_no_style" href="{{nft.url}}" target="_blank">{{nft.name_trait}}</a></li>
+                                                </ul>
+                                                <ul class="list-unstyled">
+                                                    <li class="text-muted lead">Price</li>
+                                                    <li style="
+                                                        display: flex;
+                                                        align-items: center;
+                                                    "><img class="etherum-logo" src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" alt=""> {{nft.get_price}}</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="candidate-list-favourite-time">
+                                            <span class="candidate-list-time order-1 fs-6 lead"><i class="fas fa-trophy pr-1"></i>#{{nft.rank}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    <div class="loader spinner-border text-info" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            </div>
+            {% if nfts.has_next %}
+                <a class="infinite-more-link" href="?page={{nfts.next_page_number}}"></a>
+            {% endif %}
+        </div>
+    </div>
+    <div id="message-area" class="hidden">
+        <p id="text-content" class="fs-6 lead">Notification</p>
+    </div>
+</div>
+
+
+
+{% endblock content %}
+
+{% block ExtraJs %}
+<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'js/infinite.min.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+<script src="{% static 'js/tableManager.js' %}"></script>
+
+<script>
+    console.log($('.tablemanager'))
+    $('.tablemanager').tablemanager({
+        pagination: true,
+        showrows: [20,50,100,500],
+        appendFilterby:true,
+        disableFilterBy: [3,4,5,6,7,8,9,10,11,12],
+      });
+</script> 
+
+
+{% endblock ExtraJs %}

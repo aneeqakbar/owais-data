@@ -1,0 +1,137 @@
+:root {
+    --primary-color: #14213D;
+    --secondary-color: #138FCB;
+}
+
+#main-navbar {
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
+}
+
+#main-header {
+    position: relative;
+    min-height: 80vh;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#main-header .overlay {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    background-color: transparent;
+    background-image: linear-gradient( 90deg, #FFFFFF 52%, #138FCB00 77%);
+    opacity: 0.92;
+    transition: all 0.3s, border-radius 0.3s, opacity 0.3s;
+}
+
+#main-header .content {
+    width: 40%;
+    margin: 0px auto 0px 10vw;
+    z-index: 100;
+}
+
+@media only screen and (max-width: 900px) {
+    #main-header .content {
+        width: 80%;
+        margin: 0px 20px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    #main-header .content {
+        width: 100%;
+        margin: 0px 20px;
+    }
+}
+
+.template-title {
+    color: #14213D;
+}
+
+.template-title span {
+    color: #138fcb;
+}
+
+#main-header .content .header-title {
+    font-family: "Roboto", Sans-serif;
+    font-size: 43px;
+    font-weight: bolder;
+}
+
+.bottom-header {
+    position: relative;
+    background-color: #fff;
+    bottom: 30px;
+}
+
+.temp-box-shadow {
+    box-shadow: 0px 0px 10px 7px rgb(216 216 216 / 50%);
+}
+
+.category-cont {
+    position: relative;
+    height: 300px;
+    width: 350px;
+    border-radius: 20px;
+    margin: auto;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.category-cont .overlay {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    top: 0;
+}
+
+.category-cont>img {
+    height: 100%;
+    width: 100%;
+}
+
+.category-cont .sub-heading {
+    position: absolute;
+    color: #fff;
+    bottom: 0px;
+    left: 20px;
+}
+
+.carousel-cont {
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+}
+
+.carousel-cont::-webkit-scrollbar {
+    display: none;
+}
+
+.home-sect {
+    width: 100%;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.primary-bg {
+    background-color: var(--primary-color);
+}
+
+.secondary-bg {
+    background-color: var(--secondary-color);
+}
+
+.flex-centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
