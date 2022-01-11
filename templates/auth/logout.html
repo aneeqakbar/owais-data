@@ -268,46 +268,20 @@
 
 {% block content %}
 
-
 {% block header %}
 {% endblock header %}
-
 
 <div class="container my-5">
     <div class="row">
         <div class="col-lg-12 card-margin text-center">
             <div class="card p-5 mx-auto">
-                <h2 style="color: var(--temp-primary);" class="fs-1">SignUp</h2>
-                <form action="." method="POST">
-                    {% csrf_token %}
-                    {{form|crispy}}
-
-                    {% comment %} <ul class="text-danger text-left">
-                        {%for error in form.non_field_errors%}
-                        <li>{{error}}</li>
-                        {%endfor%}
-                    </ul>
-                    {%for field in form%}
-                        <div class="form_field">
-                            {%for error in field.errors%}
-                                <p class="text-danger">
-                                {{error}}
-                                </p>
-                            {%endfor%}
-                            <p class="text-bold m-0">
-                                <strong>{{field.label_tag}}</strong>
-                            </p>
-                            {{field}}
-                            {% if field.help_text %}
-                                <div class="text-muted text-left">
-                                    {{ field.help_text|safe }}
-                                </div>
-                            {% endif %}
-                        </div>
-                    {%endfor%} {% endcomment %}
-                    <br>
-                    <input type="submit" value="SignUp" class="btn btn-success">
-                </form>
+                <h2>You have been logged out</h2>
+                <div class="border-top pt-3">
+                  <small class="text-muted">
+                     <a href="{% url 'users:login' %}">Log In Again</a>
+                  </small>
+                </div>
+            
             </div>
         </div>
     </div>

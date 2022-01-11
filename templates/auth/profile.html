@@ -268,51 +268,29 @@
 
 {% block content %}
 
-
 {% block header %}
 {% endblock header %}
 
-
 <div class="container my-5">
-    <div class="row">
-        <div class="col-lg-12 card-margin text-center">
-            <div class="card p-5 mx-auto">
-                <h2 style="color: var(--temp-primary);" class="fs-1">SignUp</h2>
-                <form action="." method="POST">
-                    {% csrf_token %}
-                    {{form|crispy}}
-
-                    {% comment %} <ul class="text-danger text-left">
-                        {%for error in form.non_field_errors%}
-                        <li>{{error}}</li>
-                        {%endfor%}
-                    </ul>
-                    {%for field in form%}
-                        <div class="form_field">
-                            {%for error in field.errors%}
-                                <p class="text-danger">
-                                {{error}}
-                                </p>
-                            {%endfor%}
-                            <p class="text-bold m-0">
-                                <strong>{{field.label_tag}}</strong>
-                            </p>
-                            {{field}}
-                            {% if field.help_text %}
-                                <div class="text-muted text-left">
-                                    {{ field.help_text|safe }}
-                                </div>
-                            {% endif %}
-                        </div>
-                    {%endfor%} {% endcomment %}
-                    <br>
-                    <input type="submit" value="SignUp" class="btn btn-success">
-                </form>
-            </div>
-        </div>
+    <div class="media">
+      <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+      <div class="media-body">
+        <h2 class="account-heading">{{ user.username }}</h2>
+        <p class="text-secondary">{{ user.email }}</p>
+      </div>
     </div>
-</div>
-
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Profile Info</legend>
+            {{ u_form|crispy }}
+            {{ p_form|crispy }}
+        </fieldset>
+        <div class="form-group mt-4">
+            <button class="btn btn-outline-info" type="submit">Update</button>
+        </div>
+    </form>
+  </div>
 
 <div id="message-area" class="hidden">
   <p id="text-content" class="fs-6 lead">Notification</p>

@@ -1,101 +1,73 @@
-<footer class="bg-light text-dark">
+{% load static %}
+<footer class="bg-light text-dark" style="overflow: hidden;">
   <!-- Footer -->
   <section id="footer">
     <div class="container">
-      <div class="row text-center text-xs-center text-sm-left text-md-left">
-        <div class="col-xs-12 col-sm-4 col-md-4">
-          <h5>Quick links</h5>
-          <ul class="list-unstyled quick-links">
+      <div class="row text-xs-center text-sm-left text-md-left">
+        <div class="col-xs-12 col-sm-4 col-md-4 pe-5">
+          <ul class="list-unstyled">
             <li>
-              <a href="javascript:void();"
-                ><i class="fa fa-angle-double-right"></i>Home</a
-              >
+              <img
+                width="200px"
+                src="{% static 'images/logo.png' %}"
+                class="attachment-full size-full mb-3"
+                alt=""
+                loading="lazy"
+                style="filter: hue-rotate(75deg);"
+              />
             </li>
             <li>
-              <a href="javascript:void();"
-                ><i class="fa fa-angle-double-right"></i>About</a
-              >
+              <p class="text-muted">Lorem ipsum dolor sit, Impedit provident aliquam delectus amet atque voluptatibus doloribus, corrupti dolor beatae voluptates sed nobis.</p>
             </li>
             <li>
-              <a href="javascript:void();"
-                ><i class="fa fa-angle-double-right"></i>FAQ</a
-              >
-            </li>
-            <li>
-              <a href="javascript:void();"
-                ><i class="fa fa-angle-double-right"></i>Get Started</a
-              >
-            </li>
-            <li>
-              <a href="javascript:void();"
-                ><i class="fa fa-angle-double-right"></i>Videos</a
-              >
-            </li>
-          </ul>
-        </div>
-        <div class="col-xs-12 col-sm-4 col-md-4">
-          <h5>Quick links</h5>
-          <ul class="list-unstyled quick-links">
-            <li>
-              <a href="javascript:void();"
-                ><i class="fa fa-angle-double-right"></i>Home</a
-              >
-            </li>
-            <li>
-              <a href="javascript:void();"
-                ><i class="fa fa-angle-double-right"></i>About</a
-              >
-            </li>
-            <li>
-              <a href="javascript:void();"
-                ><i class="fa fa-angle-double-right"></i>FAQ</a
-              >
-            </li>
-            <li>
-              <a href="javascript:void();"
-                ><i class="fa fa-angle-double-right"></i>Get Started</a
-              >
-            </li>
-            <li>
-              <a href="javascript:void();"
-                ><i class="fa fa-angle-double-right"></i>Videos</a
-              >
+              <div class="row">
+                <div class="col-2">
+                  <i class="fab fa-youtube" style="font-size: 30px;"></i>
+                </div>
+                <div class="col-2">
+                  <i class="fab fa-instagram" style="font-size: 30px;"></i>
+                </div>
+                <div class="col-2">
+                  <i class="fab fa-facebook" style="font-size: 30px;"></i>
+                </div>
+              </div>
             </li>
           </ul>
         </div>
         <div class="col-xs-12 col-sm-4 col-md-4">
-          <h5>Quick links</h5>
+          <h5 class="text-primary">Services</h5>
           <ul class="list-unstyled quick-links">
             <li>
-              <a href="javascript:void();"
-                ><i class="fa fa-angle-double-right"></i>Home</a
-              >
+              <a href="#">Home</a>
             </li>
             <li>
-              <a href="javascript:void();"
-                ><i class="fa fa-angle-double-right"></i>About</a
-              >
+              <a href="#">About</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-4">
+          <h5 class="text-primary">Resources</h5>
+          <ul class="list-unstyled quick-links">
+            <li>
+              <a href="#">Scrapers</a>
             </li>
             <li>
-              <a href="javascript:void();"
-                ><i class="fa fa-angle-double-right"></i>FAQ</a
-              >
-            </li>
-            <li>
-              <a href="javascript:void();"
-                ><i class="fa fa-angle-double-right"></i>Get Started</a
-              >
-            </li>
-            <li>
-              <a
-                href="https://wwwe.sunlimetech.com"
-                title="Design and developed by"
-                ><i class="fa fa-angle-double-right"></i>Imprint</a
-              >
+              <a href="#">Sample</a>
             </li>
           </ul>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="row bg-primary py-3">
+    <div class="col-6 text-light px-4">
+      <strong>
+        © Copyright Bulk Skips - All rights reserved
+      </strong>
+    </div>
+    <div class="col-6">
+
     </div>
   </section>
 </footer>

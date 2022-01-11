@@ -1,15 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
+
 {% block ExtraCss %}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;700&display=swap" rel="stylesheet">
 
 <style>
-    body{
-        background-color: #f9f7f6;
-        font-family: 'Montserrat', sans-serif;
-    }
     .bg-temp{
         background-color: #653cc9 !important;
     }
@@ -270,16 +268,19 @@
 
 {% block content %}
 
+{% block header %}
+{% endblock header %}
 
-<div class="container">
+<div class="container my-5">
     <div class="row">
         <div class="col-lg-12 card-margin text-center">
             <div class="card p-5 mx-auto">
                 <h2 style="color: var(--temp-primary);" class="fs-1">Login</h2>
                 <form action="." method="POST">
                     {% csrf_token %}
+                    {{form|crispy}}
                     {% comment %} {{form.as_p}} {% endcomment %}
-                    <ul class="text-danger text-left">
+                    {% comment %} <ul class="text-danger text-left">
                     {%for error in form.non_field_errors%}
                       <li>{{error}}</li>
                     {%endfor%}
@@ -295,7 +296,7 @@
                             {%endfor%}
                             {{field}}
                         </div>
-                    {%endfor%}
+                    {%endfor%} {% endcomment %}
                     <br>
                     <input type="submit" value="Login" class="btn btn-success">
                 </form>

@@ -41,10 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # third parties
-    'django_filters',
     'crispy_forms',
 
     'fetchdata.apps.FetchdataConfig',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
