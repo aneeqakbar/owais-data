@@ -264,6 +264,144 @@
         max-width: 500px;
     }
 </style>
+
+<style>
+    .gray-bg{
+        background:#eee;    
+    }
+    .pageloader {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1000000;
+      opacity:1;
+      overflow: hidden;
+      display: table;
+      padding: 50px;
+      /* border: 2px var(--seconary-color) solid; */
+      border-radius: 10px;
+    }
+    .loader {
+      text-align: center;
+      display: table-cell;
+      vertical-align: middle;
+    }
+    .loader span{
+      color: var(--secondary-color);
+      {% comment %} display: block;
+      margin-top: 40px; {% endcomment %}
+    }
+    .sp-hydrogen {
+      width: 96px;
+      height: 96px;
+      clear: both;
+      margin: 60px auto;
+      position: relative;
+      border: 3px var(--secondary-color) solid;
+      border-radius: 50%;
+      -webkit-animation: spHydro 0.7s infinite linear;
+      animation: spHydro 0.7s infinite linear;
+    }
+    .sp-hydrogen:before, .sp-hydrogen:after {
+      content: '';
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background-color: #252830;
+      border-radius: 50%;
+    }
+    .sp-hydrogen:before {
+      top: calc( 50% - 15px );
+      left: calc( 50% - 15px );
+    }
+    .sp-hydrogen:after {
+      top: -3px;
+      left: -3px;
+    }
+    
+    @-webkit-keyframes spHydro {
+      from {
+        -webkit-transform: rotate(0deg);
+      }
+      to {
+        -webkit-transform: rotate(359deg);
+      }
+    }
+    @keyframes spHydro {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(359deg);
+      }
+    }
+    
+    
+    
+      .animated {
+        -webkit-animation-duration: 1s;
+        animation-duration: 1s;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+      }
+    
+      .animated.infinite {
+        -webkit-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+      }
+    
+      @-webkit-keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+    
+        100% {
+          opacity: 1;
+        }
+      }
+    
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+    
+        100% {
+          opacity: 1;
+        }
+      }
+    
+      .fadeIn {
+        -webkit-animation-name: fadeIn;
+        animation-name: fadeIn;
+      }
+    
+      @-webkit-keyframes fadeOut {
+        0% {
+          opacity: 1;
+        }
+    
+        100% {
+          opacity: 0;
+        }
+      }
+    
+      @keyframes fadeOut {
+        0% {
+          opacity: 1;
+        }
+    
+        100% {
+          opacity: 0;
+        }
+      }
+    
+      .fadeOut {
+        -webkit-animation-name: fadeOut;
+        animation-name: fadeOut;
+      }
+    
+</style>
 {% endblock ExtraCss %}
 
 {% block content %}
@@ -309,41 +447,25 @@
                         </div>
                     </div>
 
+                    <div class="row mt-2" id="url-input-cont"></div>
+
                     <div class="row mt-2">
-                        <div class="col">
-                            <div id="div_id_refresh_time" class="form-group">
-                                <label for="id_refresh_time" class="requiredField">Url 1</label>
-                                <div class="">
-                                    <input type="text" name="refresh_time" autofocus="" autocapitalize="none" autocomplete="refresh_time" maxlength="150" class="textinput textInput form-control" required="" id="id_refresh_time">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mt-2">
-                        <div class="col">
-                            <div id="div_id_refresh_time" class="form-group">
-                                <label for="id_refresh_time" class="requiredField">Url 2</label>
-                                <div class="">
-                                    <input type="text" name="refresh_time" autofocus="" autocapitalize="none" autocomplete="refresh_time" maxlength="150" class="textinput textInput form-control" required="" id="id_refresh_time">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mt-2">
-                        <div class="col">
-                            <div id="div_id_refresh_time" class="form-group">
-                                <label for="id_refresh_time" class="requiredField">Url 3</label>
-                                <div class="">
-                                    <input type="text" name="refresh_time" autofocus="" autocapitalize="none" autocomplete="refresh_time" maxlength="150" class="textinput textInput form-control" required="" id="id_refresh_time">
-                                </div>
-                            </div>
-                        </div>
+                        <button class="btn btn-primary btn-sm" id="add-url-btn">Add Url</button>
                     </div>
 
                     {% comment %} <input type="submit" value="Login" class="btn btn-success mt-4"> {% endcomment %}
-                    <a href="{% url 'fetchdata:ScraperDataView' slug=slug sheet_num=sheet_num %}" class="btn btn-success mt-4">Scrap</a>
+                    {% comment %} <a href="{% url 'fetchdata:ScraperDataView' slug=slug sheet_num=sheet_num %}" onclick="handleSrap(this)" class="btn btn-success mt-4">Start Bot</a> {% endcomment %}
+                    <button class="btn btn-success mt-4" onclick="handleSrap(this)">Start Bot</button>
+                    <a href="#" class="btn btn-success mt-4">Stop Bot</a>
                 </form>
             </div>
+        </div>
+    </div>
+
+    <div class="pageloader bg-light shadow hidden" id="scraper-loader">
+        <div class="loader">
+          <span class="display-4">Scraping Data...</span>
+          <div class="sp-hydrogen"></div>
         </div>
     </div>
 </div>
@@ -386,4 +508,40 @@
     }, 2000);
   }
 </script>
+
+<script>
+    const addUrlBtn = document.getElementById("add-url-btn")
+    const urlInputCont = document.getElementById("url-input-cont")
+
+    addUrlBtn.addEventListener("click", ()=>{
+        let urlCount = urlInputCont.children.length;
+        urlInputCont.innerHTML += `
+            <div class="col-12 mb-3">
+                <div id="div_id_url_input" class="form-group">
+                    <label for="id_url_input_${urlCount}" class="requiredField">Url ${urlCount+1}</label>
+                    <div>
+                        <input type="text" name="url" class="textinput textInput form-control" required="" id="id_url_input_${urlCount}">
+                    </div>
+                </div>
+            </div>
+        `
+    })
+
+</script>
+
+<script>
+    const scraperLoader = document.getElementById("scraper-loader")
+    function handleSrap(elem){
+
+        setTimeout(() => {
+            scraperLoader.classList.toggle("hidden", false);
+        }, 200);
+
+        to = setTimeout(() => {
+            scraperLoader.classList.toggle("hidden", true);
+            window.location = "{% url 'fetchdata:ScraperDataView' slug=slug sheet_num=sheet_num %}"
+        }, 3000);
+    }
+</script>
+
 {% endblock ExtraJs %}
