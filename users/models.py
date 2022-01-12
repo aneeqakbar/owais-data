@@ -28,6 +28,21 @@ class Profile(models.Model):
         except:
             return ''
 
+    @property
+    def get_telegram_accounts(self):
+        try:
+            return self.telegram_accounts.all()
+        except:
+            return ''
+
+
+class TelegramAccounts(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="telegram_accounts")
+    hash_key = models.CharField(max_length=255)
+    hash_id = models.CharField(max_length=255)
+    number = models.CharField(max_length=255)
+    
+    
 
 
 @receiver(post_save, sender=User)

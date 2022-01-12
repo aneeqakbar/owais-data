@@ -7,263 +7,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;700&display=swap" rel="stylesheet">
 
-<style>
-    .bg-temp{
-        background-color: #653cc9 !important;
-    }
-
-    .widget-26 {
-    color: #3c4142;
-    font-weight: 400;
-    }
-
-    .widget-26 tr:first-child td {
-    border: 0;
-    }
-
-    .widget-26 .widget-26-job-emp-img img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    }
-
-    .widget-26 .widget-26-job-title {
-    min-width: 200px;
-    }
-
-    .widget-26 .widget-26-job-title a {
-    font-weight: 400;
-    font-size: 0.875rem;
-    color: #3c4142;
-    line-height: 1.5;
-    }
-
-    .widget-26 .widget-26-job-title a:hover {
-    color: #68CBD7;
-    text-decoration: none;
-    }
-
-    .widget-26 .widget-26-job-title .employer-name {
-    margin: 0;
-    line-height: 1.5;
-    font-weight: 400;
-    color: #3c4142;
-    font-size: 0.8125rem;
-    color: #3c4142;
-    }
-
-    .widget-26 .widget-26-job-title .employer-name:hover {
-    color: #68CBD7;
-    text-decoration: none;
-    }
-
-    .widget-26 .widget-26-job-title .time {
-    font-size: 12px;
-    font-weight: 400;
-    }
-
-    .widget-26 .widget-26-job-info {
-    min-width: 100px;
-    font-weight: 400;
-    }
-
-    .widget-26 .widget-26-job-info p {
-    line-height: 1.5;
-    color: #3c4142;
-    font-size: 0.8125rem;
-    }
-
-    .widget-26 .widget-26-job-info .location {
-    color: #3c4142;
-    }
-
-    .widget-26 .widget-26-job-salary {
-    min-width: 70px;
-    font-weight: 400;
-    color: #3c4142;
-    font-size: 0.8125rem;
-    }
-
-    .widget-26 .widget-26-job-category {
-    padding: .5rem;
-    display: inline-flex;
-    white-space: nowrap;
-    border-radius: 15px;
-    }
-
-    .widget-26 .widget-26-job-category .indicator {
-    width: 13px;
-    height: 13px;
-    margin-right: .5rem;
-    float: left;
-    border-radius: 50%;
-    }
-
-    .widget-26 .widget-26-job-category span {
-    font-size: 0.8125rem;
-    color: #3c4142;
-    font-weight: 600;
-    }
-
-    .widget-26 .widget-26-job-starred svg {
-    width: 20px;
-    height: 20px;
-    color: #fd8b2c;
-    }
-
-    .widget-26 .widget-26-job-starred svg.starred {
-    fill: #fd8b2c;
-    }
-    .bg-soft-base {
-    background-color: #e1f5f7;
-    }
-    .bg-soft-warning {
-        background-color: #fff4e1;
-    }
-    .bg-soft-success {
-        background-color: #d1f6f2;
-    }
-    .bg-soft-danger {
-        background-color: #fedce0;
-    }
-    .bg-soft-info {
-        background-color: #d7efff;
-    }
-
-
-    .search-form {
-    width: 80%;
-    margin: 0 auto;
-    margin-top: 1rem;
-    }
-
-    .search-form input {
-    height: 100%;
-    background: transparent;
-    border: 0;
-    display: block;
-    width: 100%;
-    padding: 1rem;
-    height: 100%;
-    font-size: 1rem;
-    }
-
-    .search-form select {
-    background: transparent;
-    border: 0;
-    padding: 1rem;
-    height: 100%;
-    font-size: 1rem;
-    }
-
-    .search-form select:focus {
-    border: 0;
-    }
-
-    .search-form button {
-    height: 100%;
-    width: 100%;
-    font-size: 1rem;
-    }
-
-    .search-form button svg {
-    width: 24px;
-    height: 24px;
-    }
-
-    .search-body {
-    margin-bottom: 1.5rem;
-    }
-
-    .search-body .search-filters .filter-list {
-    margin-bottom: 1.3rem;
-    }
-
-    .search-body .search-filters .filter-list .title {
-    color: #3c4142;
-    margin-bottom: 1rem;
-    }
-
-    .search-body .search-filters .filter-list .filter-text {
-    color: #727686;
-    }
-
-    .search-body .search-result .result-header {
-    margin-bottom: 2rem;
-    }
-
-    .search-body .search-result .result-header .records {
-    color: #3c4142;
-    }
-
-    .search-body .search-result .result-header .result-actions {
-    text-align: right;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    }
-
-    .search-body .search-result .result-header .result-actions .result-sorting {
-    display: flex;
-    align-items: center;
-    }
-
-    .search-body .search-result .result-header .result-actions .result-sorting span {
-    flex-shrink: 0;
-    font-size: 0.8125rem;
-    }
-
-    .search-body .search-result .result-header .result-actions .result-sorting select {
-    color: #68CBD7;
-    }
-
-    .search-body .search-result .result-header .result-actions .result-sorting select option {
-    color: #3c4142;
-    }
-
-    @media (min-width: 768px) and (max-width: 991.98px) {
-    .search-body .search-filters {
-        display: flex;
-    }
-    .search-body .search-filters .filter-list {
-        margin-right: 1rem;
-    }
-    }
-
-    .card-margin {
-        margin-bottom: 1.875rem;
-    }
-
-    @media (min-width: 992px){
-    .col-lg-2 {
-        flex: 0 0 16.66667%;
-        max-width: 16.66667%;
-    }
-    }
-
-    .card-margin {
-        margin-bottom: 1.875rem;
-    }
-    .card {
-        border: 0;
-        box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
-        -webkit-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
-        -moz-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
-        -ms-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
-    }
-    .card {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        min-width: 0;
-        word-wrap: break-word;
-        background-color: #ffffff;
-        background-clip: border-box;
-        border: 1px solid #e6e4e9;
-        border-radius: 8px;
-        max-width: 500px;
-    }
-</style>
 
 <style>
     .gray-bg{
@@ -402,6 +145,43 @@
       }
     
 </style>
+
+<style>
+  * {
+    box-sizing: border-box;
+  }
+  
+  #myInput {
+    background-image: url('/css/searchicon.png');
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    width: 100%;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+    margin-bottom: 12px;
+  }
+  
+  #myTable {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #ddd;
+    font-size: 18px;
+  }
+  
+  #myTable th, #myTable td {
+    text-align: left;
+    padding: 12px;
+  }
+  
+  #myTable tr {
+    border-bottom: 1px solid #ddd;
+  }
+  
+  #myTable tr.header, #myTable tr:hover {
+    background-color: #f1f1f1;
+  }
+</style>
 {% endblock ExtraCss %}
 
 {% block content %}
@@ -413,62 +193,115 @@
     <div class="row">
         <div class="col-lg-12 card-margin">
             <div class="card p-5 mx-auto">
-                <h2 style="color: var(--temp-primary);" class="fs-1">Question Answer Form</h2>
-                <form action="." method="POST">
-                    {% csrf_token %}
-                    <div class="row mt-2">
-                        <div class="col-6">
-                            <div id="div_id_refresh_time" class="form-group">
-                                <label for="id_refresh_time" class="requiredField">Hash Key</label>
-                                <div class="">
-                                    <input type="text" name="refresh_time" autofocus="" autocapitalize="none" autocomplete="refresh_time" maxlength="150" class="textinput textInput form-control rounded-pill" required="" id="id_refresh_time">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div id="div_id_refresh_time" class="form-group">
-                                <label for="id_refresh_time" class="requiredField">Hash ID</label>
-                                <div class="">
-                                    <input type="text" name="refresh_time" autofocus="" autocapitalize="none" autocomplete="refresh_time" maxlength="150" class="textinput textInput form-control rounded-pill" required="" id="id_refresh_time">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <h2 style="color: var(--temp-primary);" class="fs-1">Question Answer Settings</h2>
 
-                    <div class="row mt-2">
-                        <div class="col">
-                            <div id="div_id_refresh_time" class="form-group">
-                                <label for="id_refresh_time" class="requiredField">Registered Telegram Number</label>
-                                <div class="">
-                                    <input type="text" name="refresh_time" autofocus="" autocapitalize="none" autocomplete="refresh_time" maxlength="150" class="textinput textInput form-control rounded-pill" required="" id="id_refresh_time">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <button type="button" class="btn btn-primary btn-sm my-4 ms-auto" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Add Account
+                </button>
 
-                    <div class="row mt-3">
-                        <div class="col text-end">
-                            <button class="btn btn-primary btn-sm">Verify Account</button>
-                            <button class="btn btn-primary btn-sm">Create Session</button>
-                        </div>
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <form action="." method="POST" id="add-account-form">
+                          {% csrf_token %}
+                          <div class="row mt-2">
+                              <div class="col-6">
+                                  <div id="div_id_hash_key" class="form-group">
+                                      <label for="id_hash_key" class="requiredField">Hash Key</label>
+                                      <div class="">
+                                          <input type="text" name="hash_key" autofocus="" autocapitalize="none" autocomplete="hash_key" maxlength="150" class="textinput textInput form-control rounded-pill" required="" id="id_hash_key">
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="col-6">
+                                  <div id="div_id_hash_id" class="form-group">
+                                      <label for="id_hash_id" class="requiredField">Hash ID</label>
+                                      <div class="">
+                                          <input type="text" name="hash_id" autofocus="" autocapitalize="none" autocomplete="hash_id" maxlength="150" class="textinput textInput form-control rounded-pill" required="" id="id_hash_id">
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+      
+                          <div class="row mt-2">
+                              <div class="col">
+                                  <div id="div_id_number" class="form-group">
+                                      <label for="id_number" class="requiredField">Registered Telegram Number</label>
+                                      <div class="">
+                                          <input type="text" name="number" autofocus="" autocapitalize="none" autocomplete="number" maxlength="150" class="textinput textInput form-control rounded-pill" required="" id="id_number">
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+      
+                          <div class="row mt-3">
+                              <div class="col text-end">
+                                  <button class="btn btn-primary btn-sm" onclick="verifyAccount()" type="button">Verify Account & Create Session</button>
+                              </div>
+                          </div>
+      
+      
+                          <div class="row mt-2">
+                              <div class="col">
+                                  <div id="div_id_code" class="form-group">
+                                      <label for="id_code" class="requiredField">Enter Code</label>
+                                      <div class="">
+                                          <input type="text" name="code" autofocus="" autocapitalize="none" autocomplete="code" maxlength="150" class="textinput textInput form-control rounded-pill" required="" id="id_code">
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+      
+                          {% comment %} <input type="submit" value="Login" class="btn btn-success mt-4"> {% endcomment %}
+                          {% comment %} <a href="{% url 'fetchdata:ScraperDataView' slug=slug sheet_num=sheet_num %}" onclick="handleSrap(this)" class="btn btn-success mt-4">Start Bot</a> {% endcomment %}
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                      </div>
                     </div>
+                  </div>
+                </div>
 
 
-                    <div class="row mt-2">
-                        <div class="col">
-                            <div id="div_id_refresh_time" class="form-group">
-                                <label for="id_refresh_time" class="requiredField">Enter Code</label>
-                                <div class="">
-                                    <input type="text" name="refresh_time" autofocus="" autocapitalize="none" autocomplete="refresh_time" maxlength="150" class="textinput textInput form-control rounded-pill" required="" id="id_refresh_time">
-                                </div>
-                            </div>
+
+                <table id="myTable" class="tablemanager">
+                  <thead>
+                    <tr class="header">
+                      <th>Hash Key</th>
+                      <th>Hash ID</th>
+                      <th>Number</th>
+                      <th>Status</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for account in user.profile.get_telegram_accounts %}
+                    <tr>
+                      <td>{{account.key}}</td>
+                      <td>{{account.id}}</td>
+                      <td>{{account.number}}</td>
+                      <td>{{account.get_status_display}}</td>
+                      <td>
+                        <div class="row">
+                          <div class="col-6">
+                            <button class="btn btn-warning btn-sm">Edit</button>
+                          </div>
+                          <div class="col-6">
+                            <button class="btn btn-danger btn-sm">Delete</button>
+                          </div>
                         </div>
-                    </div>
-                    {% comment %} <input type="submit" value="Login" class="btn btn-success mt-4"> {% endcomment %}
-                    {% comment %} <a href="{% url 'fetchdata:ScraperDataView' slug=slug sheet_num=sheet_num %}" onclick="handleSrap(this)" class="btn btn-success mt-4">Start Bot</a> {% endcomment %}
-                    <button class="btn btn-success mt-4" onclick="handleSrap(this)">Start Bot</button>
-                    <a href="#" class="btn btn-success mt-4">Stop Bot</a>
-                </form>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -521,22 +354,12 @@
 </script>
 
 <script>
-    const addUrlBtn = document.getElementById("add-url-btn")
-    const urlInputCont = document.getElementById("url-input-cont")
-
-    addUrlBtn.addEventListener("click", ()=>{
-        let urlCount = urlInputCont.children.length;
-        urlInputCont.innerHTML += `
-            <div class="col-12 mb-3">
-                <div id="div_id_url_input" class="form-group">
-                    <label for="id_url_input_${urlCount}" class="requiredField">Url ${urlCount+1}</label>
-                    <div>
-                        <input type="text" name="url" class="textinput textInput form-control" required="" id="id_url_input_${urlCount}">
-                    </div>
-                </div>
-            </div>
-        `
-    })
+  const addAccountBtn = document.getElementById("add-account-form")
+  function verifyAccount(){
+    let hash_key = addAccountBtn.hash_key.value
+    let hash_id = addAccountBtn.hash_id.value
+    let number = addAccountBtn.number.value
+  }
 
 </script>
 
@@ -554,5 +377,6 @@
         }, 3000);
     }
 </script>
+
 
 {% endblock ExtraJs %}
