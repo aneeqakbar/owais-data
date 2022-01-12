@@ -13,26 +13,56 @@
 <section class="container home-sect my-5">
     <div class="text-center template-title mb-5">
         <h4><span>Data Available</span></h4>
-        <h2>Select Csv To View</h2>
+        <h2>Select Bot</h2>
     </div>
 
-    <div class="row w-75">
+    <div class="row w-75 justify-content-center">
         <div class="col-6 col-md-4 text-center mb-3">
-            <a href="{% url 'fetchdata:SheetDataView' slug=scraper_name sheet_num='1' %}" class="a-no-style card p-4">
+            <a href="{% url 'fetchdata:SheetDataView' slug=scraper_name sheet_num='1' %}" class="a-no-style card p-4" style="min-height: 0px;">
                 <i class="fab fa-instagram mb-3 text-secondary" style="font-size: 72px;"></i>
-                <h2>Instagram</h2>
+                <h2 class="lead">Message Scraping BOT</h2>
             </a>
         </div>
         <div class="col-6 col-md-4 text-center mb-3">
-            <a href="{% url 'fetchdata:SheetDataView' slug=scraper_name sheet_num='2' %}" class="a-no-style card p-4">
+            <a href="{% url 'fetchdata:SheetDataView' slug=scraper_name sheet_num='2' %}" class="a-no-style card p-4" style="min-height: 0px;">
                 <i class="fab fa-telegram mb-3 text-secondary" style="font-size: 72px;"></i>
-                <h2>Telegram</h2>
+                <h2 class="lead">Message Sending BOT</h2>
             </a>
         </div>
         <div class="col-6 col-md-4 text-center mb-3">
-            <a href="{% url 'fetchdata:SheetDataView' slug=scraper_name sheet_num='3' %}" class="a-no-style card p-4">
+            <a href="{% url 'fetchdata:SheetDataView' slug=scraper_name sheet_num='3' %}" class="a-no-style card p-4" style="min-height: 0px;">
                 <i class="fab fa-reddit mb-3 text-secondary" style="font-size: 72px;"></i>
-                <h2>Reddit</h2>
+                <h2 class="lead">Auto Notifying BOT</h2>
+            </a>
+        </div>
+        <div class="col-6 col-md-4 text-center mb-3">
+            <a href="{% url 'fetchdata:SheetDataView' slug=scraper_name sheet_num='1' %}" class="a-no-style card p-4" style="min-height: 0px;">
+                <i class="fab fa-instagram mb-3 text-secondary" style="font-size: 72px;"></i>
+                <h2 class="lead">Airdrop BOT</h2>
+            </a>
+        </div>
+        <div class="col-6 col-md-4 text-center mb-3">
+            <a href="{% url 'fetchdata:SheetDataView' slug=scraper_name sheet_num='2' %}" class="a-no-style card p-4" style="min-height: 0px;">
+                <i class="fab fa-telegram mb-3 text-secondary" style="font-size: 72px;"></i>
+                <h2 class="lead">Members Scraping BOT</h2>
+            </a>
+        </div>
+        <div class="col-6 col-md-4 text-center mb-3">
+            <a href="{% url 'fetchdata:SheetDataView' slug=scraper_name sheet_num='3' %}" class="a-no-style card p-4" style="min-height: 0px;">
+                <i class="fab fa-reddit mb-3 text-secondary" style="font-size: 72px;"></i>
+                <h2 class="lead">Question Answer BOT</h2>
+            </a>
+        </div>
+        <div class="col-6 col-md-4 text-center mb-3">
+            <a href="{% url 'fetchdata:SheetDataView' slug=scraper_name sheet_num='1' %}" class="a-no-style card p-4" style="min-height: 0px;">
+                <i class="fab fa-instagram mb-3 text-secondary" style="font-size: 72px;"></i>
+                <h2 class="lead">Auto Adder/Remover</h2>
+            </a>
+        </div>
+        <div class="col-6 col-md-4 text-center mb-3">
+            <a href="{% url 'fetchdata:SheetDataView' slug=scraper_name sheet_num='2' %}" class="a-no-style card p-4" style="min-height: 0px;">
+                <i class="fab fa-telegram mb-3 text-secondary" style="font-size: 72px;"></i>
+                <h2 class="lead">Custom BOT</h2>
             </a>
         </div>
     </div>

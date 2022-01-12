@@ -168,41 +168,65 @@
         <h2>Popular Services We Provided</h2>
     </div>
 
-    <div class="row">
-        <div class="col-6 col-md-4 text-center mb-3">
+    <div class="row justify-content-center">
+        <div class="col-6 col-md-4 text-center mb-5">
             <a href="{% url 'fetchdata:ScraperView' slug='Instagram' %}" class="a-no-style">
                 <img width="64" height="64" src="https://www.bulkskips.com/wp-content/uploads/2021/11/check-6.png" class="mb-4" alt="" loading="lazy">
                 <h2>Instagram BOT</h2>
             </a>
         </div>
-        <div class="col-6 col-md-4 text-center mb-3">
+        <div class="col-6 col-md-4 text-center mb-5">
             <a href="{% url 'fetchdata:ScraperView' slug='Telegram' %}" class="a-no-style">
                 <img width="64" height="64" src="https://www.bulkskips.com/wp-content/uploads/2021/11/check-6.png" class="mb-4" alt="" loading="lazy">
                 <h2>Telegram BOT</h2>
             </a>
         </div>
-        <div class="col-6 col-md-4 text-center mb-3">
+        <div class="col-6 col-md-4 text-center mb-5">
             <a href="{% url 'fetchdata:ScraperView' slug='Facebook' %}" class="a-no-style">
                 <img width="64" height="64" src="https://www.bulkskips.com/wp-content/uploads/2021/11/check-6.png" class="mb-4" alt="" loading="lazy">
                 <h2>Facebook BOT</h2>
             </a>
         </div>
-        <div class="col-6 col-md-4 text-center mb-3">
+        <div class="col-6 col-md-4 text-center mb-5">
             <a href="{% url 'fetchdata:ScraperView' slug='Amazon' %}" class="a-no-style">
                 <img width="64" height="64" src="https://www.bulkskips.com/wp-content/uploads/2021/11/check-6.png" class="mb-4" alt="" loading="lazy">
-                <h2>Amazon Scraper</h2>
+                <h2>LinkedIn BOT</h2>
             </a>
         </div>
-        <div class="col-6 col-md-4 text-center mb-3">
+        <div class="col-6 col-md-4 text-center mb-5">
             <a href="{% url 'fetchdata:ScraperView' slug='Spotify' %}" class="a-no-style">
                 <img width="64" height="64" src="https://www.bulkskips.com/wp-content/uploads/2021/11/check-6.png" class="mb-4" alt="" loading="lazy">
-                <h2>Spotify Scraper</h2>
+                <h2>Discord BOT</h2>
             </a>
         </div>
-        <div class="col-6 col-md-4 text-center mb-3">
+        <div class="col-6 col-md-4 text-center mb-5">
             <a href="{% url 'fetchdata:ScraperView' slug='Custom' %}" class="a-no-style">
                 <img width="64" height="64" src="https://www.bulkskips.com/wp-content/uploads/2021/11/check-6.png" class="mb-4" alt="" loading="lazy">
-                <h2>Custom Scraper</h2>
+                <h2>Amazon BOT</h2>
+            </a>
+        </div>
+        <div class="col-6 col-md-4 text-center mb-5">
+            <a href="{% url 'fetchdata:ScraperView' slug='Amazon' %}" class="a-no-style">
+                <img width="64" height="64" src="https://www.bulkskips.com/wp-content/uploads/2021/11/check-6.png" class="mb-4" alt="" loading="lazy">
+                <h2>Home Depop BOT</h2>
+            </a>
+        </div>
+        <div class="col-6 col-md-4 text-center mb-5">
+            <a href="{% url 'fetchdata:ScraperView' slug='Spotify' %}" class="a-no-style">
+                <img width="64" height="64" src="https://www.bulkskips.com/wp-content/uploads/2021/11/check-6.png" class="mb-4" alt="" loading="lazy">
+                <h2>Spotify BOT</h2>
+            </a>
+        </div>
+        <div class="col-6 col-md-4 text-center mb-5">
+            <a href="{% url 'fetchdata:ScraperView' slug='Custom' %}" class="a-no-style">
+                <img width="64" height="64" src="https://www.bulkskips.com/wp-content/uploads/2021/11/check-6.png" class="mb-4" alt="" loading="lazy">
+                <h2>Ebay BOT</h2>
+            </a>
+        </div>
+        <div class="col-6 col-md-4 text-center mb-5">
+            <a href="{% url 'fetchdata:ScraperView' slug='Custom' %}" class="a-no-style">
+                <img width="64" height="64" src="https://www.bulkskips.com/wp-content/uploads/2021/11/check-6.png" class="mb-4" alt="" loading="lazy">
+                <h2>Custom BOT</h2>
             </a>
         </div>
     </div>
@@ -220,18 +244,18 @@
                 <div class="col-md-5 temp-box-shadow mb-3 mx-md-4 bg-light p-5">
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus eaque ex iure commodi labore vero.</p>
                     <div class="row mt-4">
-                        <div class="col text-start">
-                            <img src="./default-profile.png" alt="" width="80px" class=rounded-circle>
-                            <h3 class="d-inline">Someone</h3>
+                        <div class="col text-start d-flex align-items-center">
+                            <img src="{% static 'images/profile.png' %}" alt="" width="50px" class=rounded-circle>
+                            <h3 class="d-inline m-0 ms-3">Someone</h3>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-5 temp-box-shadow mb-3 mx-md-4 bg-light p-5">
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus eaque ex iure commodi labore vero.</p>
                     <div class="row mt-4">
-                        <div class="col text-start">
-                            <img src="./default-profile.png" alt="" width="80px" class=rounded-circle>
-                            <h3 class="d-inline">Someone</h3>
+                        <div class="col text-start d-flex align-items-center">
+                            <img src="{% static 'images/profile.png' %}" alt="" width="50px" class=rounded-circle>
+                            <h3 class="d-inline m-0 ms-3">Someone</h3>
                         </div>
                     </div>
                 </div>
