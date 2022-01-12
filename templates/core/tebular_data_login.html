@@ -278,30 +278,9 @@
                 <h2 style="color: var(--temp-primary);" class="fs-1">Give Your Credentials</h2>
                 <form action="." method="POST">
                     {% csrf_token %}
-
-                    <div class="row mt-2">
-                        <div class="col">
-                            <div id="div_id_refresh_time" class="form-group">
-                                <label for="id_refresh_time" class="requiredField">Username</label>
-                                <div class="">
-                                    <input type="text" name="refresh_time" autofocus="" autocapitalize="none" autocomplete="refresh_time" maxlength="150" class="textinput textInput form-control" required="" id="id_refresh_time">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row mt-2">
-                        <div class="col">
-                            <div id="div_id_refresh_time" class="form-group">
-                                <label for="id_refresh_time" class="requiredField">Password</label>
-                                <div class="">
-                                    <input type="password" name="refresh_time" autofocus="" autocapitalize="none" autocomplete="refresh_time" maxlength="150" class="textinput textInput form-control" required="" id="id_refresh_time">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <input type="submit" value="Login" class="btn btn-success mt-4">
+                    {{form|crispy}}
+                    <br>
+                    <input type="submit" value="Submit" class="btn btn-success">
                 </form>
             </div>
         </div>
