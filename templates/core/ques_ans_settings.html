@@ -194,10 +194,18 @@
         <div class="col-lg-12 card-margin">
             <div class="card p-5 mx-auto">
                 <h2 style="color: var(--temp-primary);" class="fs-1">Question Answer Settings</h2>
+            
+                <div class="row my-4">
+                  <div class="col">
+                    <a href="{% url 'fetchdata:ManageSequenceView' %}" class="btn btn-warning btn-sm">
+                      Sequence
+                    </a>
+                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                      Add Account
+                    </button>
 
-                <button type="button" class="btn btn-primary btn-sm my-4 ms-auto" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                  Add Account
-                </button>
+                  </div>
+                </div>
 
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog">
@@ -246,12 +254,16 @@
                           </div>
       
       
-                          <div class="row mt-2">
+                          <div class="row mt-2 hidden" id="verify-code-cont">
                               <div class="col">
                                   <div id="div_id_code" class="form-group">
                                       <label for="id_code" class="requiredField">Enter Code</label>
-                                      <div class="">
+                                      <div class="text-center">
                                           <input type="text" name="code" autofocus="" autocapitalize="none" autocomplete="code" maxlength="150" class="textinput textInput form-control rounded-pill" required="" id="id_code">
+                                          <button class="btn btn-success btn-sm mt-3" onclick="verifyCode()" id="verify-code-btn" type="button">Check</button>
+                                      </div>
+                                      <div id="verify-code-msg" class="hidden">
+                                        <p class="text-success lead">Verified Successfully.</p>
                                       </div>
                                   </div>
                               </div>
@@ -282,10 +294,10 @@
                     </tr>
                   </thead>
                   <tbody>
-                    {% for account in user.profile.get_telegram_accounts %}
+                    {% for account in request.user.profile.get_telegram_accounts %}
                     <tr>
-                      <td>{{account.key}}</td>
-                      <td>{{account.id}}</td>
+                      <td>{{account.hash_key}}</td>
+                      <td>{{account.hash_id}}</td>
                       <td>{{account.number}}</td>
                       <td>{{account.get_status_display}}</td>
                       <td>
@@ -309,6 +321,13 @@
     <div class="pageloader bg-light shadow hidden" id="scraper-loader">
         <div class="loader">
           <span class="display-4">Scraping Data...</span>
+          <div class="sp-hydrogen"></div>
+        </div>
+    </div>
+
+    <div class="pageloader bg-light shadow hidden" id="generic-loader">
+        <div class="loader">
+          <span class="display-4 text-msg"></span>
           <div class="sp-hydrogen"></div>
         </div>
     </div>
@@ -354,11 +373,64 @@
 </script>
 
 <script>
-  const addAccountBtn = document.getElementById("add-account-form")
+  const addAccountBtn = document.getElementById("add-account-form");
+  const verifyCodeCont = document.getElementById("verify-code-cont");
+  const verifyCodeBtn = document.getElementById("verify-code-btn");
+  const verifyMessage = document.getElementById("verify-code-msg");
+
   function verifyAccount(){
     let hash_key = addAccountBtn.hash_key.value
     let hash_id = addAccountBtn.hash_id.value
     let number = addAccountBtn.number.value
+
+    let data = {
+      'hash_key': hash_key,
+      'hash_id': hash_id,
+      'number': number,
+    }
+
+    $.ajax({
+      url: "{% url 'fetchdata:TelegramNumberView' %}",
+      dataType: "json",
+      type: "Post",
+      async: true,
+      data: JSON.stringify(data),
+      success: function (res, textStatus, xhr) {
+         if (xhr.status == 200){
+          handleLoading("Sending Code")
+          setTimeout(() => {
+            verifyCodeCont.classList.toggle("hidden", false)
+          }, 2500);
+         }
+      },
+      error: function (xhr, exception) {
+        var msg = "";
+        if (xhr.status === 0) {
+            msg = "Not connect.\n Verify Network." + xhr.responseText;
+        } else if (xhr.status == 404) {
+            msg = "Requested page not found. [404]" + xhr.responseText;
+        } else if (xhr.status == 500) {
+            msg = "Internal Server Error [500]." +  xhr.responseText;
+        } else if (exception === "parsererror") {
+            msg = "Requested JSON parse failed.";
+        } else if (exception === "timeout") {
+            msg = "Time out error." + xhr.responseText;
+        } else if (exception === "abort") {
+            msg = "Ajax request aborted.";
+        } else {
+            msg = "Error:" + xhr.status + " " + xhr.responseText;
+        }
+        console.log(msg)
+      }
+    });
+  }
+
+  function verifyCode(){
+    handleLoading("CheckingCode")
+    setTimeout(() => {
+      verifyMessage.classList.toggle("hidden", false)
+      window.location.reload()
+    }, 2500);
   }
 
 </script>
@@ -374,7 +446,19 @@
         to = setTimeout(() => {
             scraperLoader.classList.toggle("hidden", true);
             window.location = "{% url 'fetchdata:ScraperDataView' slug=slug scrap_opt=scrap_opt %}"
-        }, 3000);
+        }, 2000);
+    }
+
+    const loader = document.getElementById("generic-loader")
+    function handleLoading(text){
+        loader.getElementsByClassName("text-msg")[0].innerText = text
+        setTimeout(() => {
+            loader.classList.toggle("hidden", false);
+        }, 200);
+
+        to = setTimeout(() => {
+            loader.classList.toggle("hidden", true);
+        }, 2000);
     }
 </script>
 

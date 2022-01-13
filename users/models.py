@@ -31,16 +31,22 @@ class Profile(models.Model):
     @property
     def get_telegram_accounts(self):
         try:
-            return self.telegram_accounts.all()
+            return self.user.telegram_accounts.all()
         except:
             return ''
 
 
 class TelegramAccounts(models.Model):
+    STATUS_CHOICES = (
+        ('v', 'Verified'),
+        ('un', 'UnVerified'),
+    )
+    
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="telegram_accounts")
     hash_key = models.CharField(max_length=255)
     hash_id = models.CharField(max_length=255)
     number = models.CharField(max_length=255)
+    status = models.CharField(choices=STATUS_CHOICES, max_length=10, default='v')
     
     
 

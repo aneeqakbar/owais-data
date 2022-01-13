@@ -3,10 +3,15 @@ from django.http.response import Http404, HttpResponse
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView
 from django.views import View
+from django.http import JsonResponse
+
+from users.models import TelegramAccounts
 from .filters import ScraperFilter
 from django.core.paginator import Paginator
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.forms import AuthenticationForm
-
+import json
 
 from fetchdata.models import ScraperData
 
@@ -55,6 +60,10 @@ class ScraperDataView(View):
 
 
 class SheetDataView(View):
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super(SheetDataView, self).dispatch(request, *args, **kwargs)
+
     def get(self, request, slug, scrap_opt):
         print(slug)
         print(scrap_opt)
@@ -128,3 +137,47 @@ class SheetDataView(View):
         # context = {"data": data}
         # return render(request, "core/tebular_data.html", context)
 
+
+class TelegramNumberView(View):
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super(TelegramNumberView, self).dispatch(request, *args, **kwargs)
+
+    def post(self, request):
+        data = json.loads(request.body)
+        hash_key = data['hash_key']
+        hash_id = data['hash_id']
+        number = data['number']
+
+        telegram_account, created = TelegramAccounts.objects.get_or_create(
+            user = request.user,
+            hash_key = hash_key,
+            hash_id = hash_id,
+            number = number,
+        )
+
+        return JsonResponse(data=data, status=200)
+
+
+class ManageSequenceView(View):
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super(ManageSequenceView, self).dispatch(request, *args, **kwargs)
+
+    def get(self, request):
+        return render(request, "core/sequence_settings.html")
+
+    def post(self, request):
+        data = json.loads(request.body)
+        hash_key = data['hash_key']
+        hash_id = data['hash_id']
+        number = data['number']
+
+        telegram_account, created = TelegramAccounts.objects.get_or_create(
+            user = request.user,
+            hash_key = hash_key,
+            hash_id = hash_id,
+            number = number,
+        )
+
+        return JsonResponse(data=data, status=200)
