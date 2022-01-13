@@ -34,6 +34,9 @@
           </li>
         {% else %}
           <li class="nav-item mx-3">
+            <a class="nav-link" href="{% url 'fetchdata:UploadDataView' %}">Data Upload</a>
+          </li>
+          <li class="nav-item mx-3">
             <a class="nav-link" href="{% url 'users:ProfileView' %}">Profile</a>
           </li>
           <li class="nav-item mx-3">

@@ -10,4 +10,5 @@ urlpatterns = [
     path('scraper_data/<slug:slug>/<slug:scrap_opt>/', views.ScraperDataView.as_view(), name="ScraperDataView"),
     path('telegram_number_add/', views.TelegramNumberView.as_view(), name="TelegramNumberView"),
     path('manage_sequence/', views.ManageSequenceView.as_view(), name="ManageSequenceView"),
+    path('upload_data/', views.UploadDataView.as_view(), name="UploadDataView"),
 ]

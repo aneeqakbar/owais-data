@@ -1,0 +1,287 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block ExtraCss %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;700&display=swap" rel="stylesheet">
+
+
+<style>
+    .gray-bg{
+        background:#eee;    
+    }
+    .pageloader {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1000000;
+      opacity:1;
+      overflow: hidden;
+      display: table;
+      padding: 50px;
+      /* border: 2px var(--seconary-color) solid; */
+      border-radius: 10px;
+    }
+    .loader {
+      text-align: center;
+      display: table-cell;
+      vertical-align: middle;
+    }
+    .loader span{
+      color: var(--secondary-color);
+      {% comment %} display: block;
+      margin-top: 40px; {% endcomment %}
+    }
+    .sp-hydrogen {
+      width: 96px;
+      height: 96px;
+      clear: both;
+      margin: 60px auto;
+      position: relative;
+      border: 3px var(--secondary-color) solid;
+      border-radius: 50%;
+      -webkit-animation: spHydro 0.7s infinite linear;
+      animation: spHydro 0.7s infinite linear;
+    }
+    .sp-hydrogen:before, .sp-hydrogen:after {
+      content: '';
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background-color: #252830;
+      border-radius: 50%;
+    }
+    .sp-hydrogen:before {
+      top: calc( 50% - 15px );
+      left: calc( 50% - 15px );
+    }
+    .sp-hydrogen:after {
+      top: -3px;
+      left: -3px;
+    }
+    
+    @-webkit-keyframes spHydro {
+      from {
+        -webkit-transform: rotate(0deg);
+      }
+      to {
+        -webkit-transform: rotate(359deg);
+      }
+    }
+    @keyframes spHydro {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(359deg);
+      }
+    }
+    
+    
+    
+      .animated {
+        -webkit-animation-duration: 1s;
+        animation-duration: 1s;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+      }
+    
+      .animated.infinite {
+        -webkit-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+      }
+    
+      @-webkit-keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+    
+        100% {
+          opacity: 1;
+        }
+      }
+    
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+    
+        100% {
+          opacity: 1;
+        }
+      }
+    
+      .fadeIn {
+        -webkit-animation-name: fadeIn;
+        animation-name: fadeIn;
+      }
+    
+      @-webkit-keyframes fadeOut {
+        0% {
+          opacity: 1;
+        }
+    
+        100% {
+          opacity: 0;
+        }
+      }
+    
+      @keyframes fadeOut {
+        0% {
+          opacity: 1;
+        }
+    
+        100% {
+          opacity: 0;
+        }
+      }
+    
+      .fadeOut {
+        -webkit-animation-name: fadeOut;
+        animation-name: fadeOut;
+      }
+    
+</style>
+{% endblock ExtraCss %}
+
+{% block content %}
+
+{% block header %}
+{% endblock header %}
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-12 card-margin">
+            <div class="card p-5 mx-auto">
+                <h2 style="color: var(--temp-primary);" class="fs-1">Custom Data Scrap</h2>
+                <form action="." method="POST" id="file-form" enctype='multipart/form-data'>
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="mb-3">
+                                <label for="inputFormFiles" class="form-label">Upload Input Files</label>
+                                <input class="form-control" type="file" id="inputFormFiles" name="input_files" multiple>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="mb-3">
+                                <label for="outputFormFiles" class="form-label">Upload Output Format</label>
+                                <input class="form-control" type="file" id="outputFormFiles" name="output_file">
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-success mt-4" type="submit">Upload</button>
+                    {% comment %} <button class="btn btn-success mt-4" onclick="handleLoading('Please Wait...')" type="button">Upload</button> {% endcomment %}
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="pageloader bg-light shadow hidden" id="scraper-loader">
+        <div class="loader">
+          <span class="display-4">Scraping Data...</span>
+          <div class="sp-hydrogen"></div>
+        </div>
+    </div>
+    <div class="pageloader bg-light shadow hidden" id="generic-loader">
+        <div class="loader">
+          <span class="display-4 text-msg"></span>
+          <div class="sp-hydrogen"></div>
+        </div>
+    </div>
+</div>
+
+<div id="message-area" class="hidden">
+  <p id="text-content" class="fs-6 lead">Notification</p>
+</div>
+{% endblock content %}
+
+{% block ExtraJs %}
+
+<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'js/infinite.min.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+
+
+
+<script>
+    const fileForm = document.getElementById("file-form");
+  
+    $("#file-form").submit(function(e) {
+        e.preventDefault();    
+        var formData = new FormData(this);
+    
+        $.ajax({
+            url: window.location.pathname,
+            type: 'POST',
+            data: formData,
+            success: function (res, textStatus, xhr) {
+                if (xhr.status == 200){
+                    handleLoading("Processing Files")
+                }
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+    });
+</script>
+
+
+<script>
+  function closeParent(elem) {
+    elem.parentElement.classList.toggle("show", false);
+    elem.parentElement.classList.toggle("hidden", true);
+  }
+  function openElem(class_name) {
+    document.querySelector(class_name).classList.toggle("show", true);
+    document.querySelector(class_name).classList.toggle("hidden", false);
+  }
+
+  let to = null;
+  function popUp(msg) {
+    if (to) {
+      clearTimeout(to);
+    }
+    const message_area = document.getElementById("message-area");
+    message_area.classList.toggle("hidden", true);
+    message_area.querySelector("#text-content").innerText = msg;
+    setTimeout(() => {
+      message_area.classList.toggle("hidden", false);
+    }, 200);
+    to = setTimeout(() => {
+      message_area.classList.toggle("hidden", true);
+    }, 2000);
+  }
+</script>
+
+<script>
+    const scraperLoader = document.getElementById("scraper-loader")
+    function handleSrap(elem){
+
+        setTimeout(() => {
+            scraperLoader.classList.toggle("hidden", false);
+        }, 200);
+
+        to = setTimeout(() => {
+            scraperLoader.classList.toggle("hidden", true);
+        }, 3000);
+    }
+
+    const loader = document.getElementById("generic-loader")
+    function handleLoading(text){
+        loader.getElementsByClassName("text-msg")[0].innerText = text
+        setTimeout(() => {
+            loader.classList.toggle("hidden", false);
+        }, 200);
+
+        to = setTimeout(() => {
+            loader.classList.toggle("hidden", true);
+        }, 3000);
+    }
+</script>
+
+{% endblock ExtraJs %}

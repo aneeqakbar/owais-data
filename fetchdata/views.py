@@ -1,9 +1,11 @@
+import re
 from django.contrib.auth import authenticate, login
 from django.http.response import Http404, HttpResponse
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView
 from django.views import View
 from django.http import JsonResponse
+from fetchdata.forms import InputFileUploadForm, OutputFileUploadForm
 
 from users.models import TelegramAccounts
 from .filters import ScraperFilter
@@ -12,8 +14,10 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.forms import AuthenticationForm
 import json
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-from fetchdata.models import ScraperData
+
+from fetchdata.models import InputFileUpload, OutputFileUpload, ScraperData
 
 # Create your views here.
 
@@ -181,3 +185,35 @@ class ManageSequenceView(View):
         )
 
         return JsonResponse(data=data, status=200)
+
+
+class UploadDataView(LoginRequiredMixin, View):
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super(UploadDataView, self).dispatch(request, *args, **kwargs)
+
+    def get(self, request):
+        output_form = OutputFileUploadForm()
+        input_form = InputFileUploadForm()
+        context = {
+            'output_form': output_form,
+            'input_form': input_form,
+        }
+        return render(request, "core/data_upload.html", context)
+
+    def post(self, request):
+        data = request.FILES
+        input_files = data.getlist("input_files", None)
+        output_file = data.get("output_file", None)
+
+        output_file_ins = OutputFileUpload.objects.create(
+            file = output_file,
+        )
+
+        for file in input_files:
+            InputFileUpload.objects.create(
+                user = request.user,
+                input_file = file,
+                output_file = output_file_ins,
+            )
+        return JsonResponse(data='', status=200, safe=False)
