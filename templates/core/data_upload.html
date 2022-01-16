@@ -163,13 +163,13 @@
                         <div class="col-6">
                             <div class="mb-3">
                                 <label for="inputFormFiles" class="form-label">Upload Input Files</label>
-                                <input class="form-control" type="file" id="inputFormFiles" name="input_files" multiple>
+                                <input class="form-control" type="file" id="inputFormFiles" name="input_files" multiple required>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="mb-3">
                                 <label for="outputFormFiles" class="form-label">Upload Output Format</label>
-                                <input class="form-control" type="file" id="outputFormFiles" name="output_file">
+                                <input class="form-control" type="file" id="outputFormFiles" name="output_file" required>
                             </div>
                         </div>
                     </div>
@@ -221,6 +221,7 @@
             success: function (res, textStatus, xhr) {
                 if (xhr.status == 200){
                     handleLoading("Processing Files")
+                    window.location.href = "{% url 'fetchdata:UserProcessedFileView' %}"
                 }
             },
             cache: false,

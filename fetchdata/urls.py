@@ -11,4 +11,5 @@ urlpatterns = [
     path('telegram_number_add/', views.TelegramNumberView.as_view(), name="TelegramNumberView"),
     path('manage_sequence/', views.ManageSequenceView.as_view(), name="ManageSequenceView"),
     path('upload_data/', views.UploadDataView.as_view(), name="UploadDataView"),
+    path('processed_files/', views.UserProcessedFileView.as_view(), name="UserProcessedFileView"),
 ]

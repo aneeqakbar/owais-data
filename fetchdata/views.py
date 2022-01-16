@@ -1,10 +1,11 @@
-import re
+import os
 from django.contrib.auth import authenticate, login
 from django.http.response import Http404, HttpResponse
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView
 from django.views import View
 from django.http import JsonResponse
+from . import upload_file_process
 from fetchdata.forms import InputFileUploadForm, OutputFileUploadForm
 
 from users.models import TelegramAccounts
@@ -15,9 +16,9 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.forms import AuthenticationForm
 import json
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.conf import settings
 
-
-from fetchdata.models import InputFileUpload, OutputFileUpload, ScraperData
+from fetchdata.models import InputFileUpload, OutputFileUpload, ProcessedFile, ScraperData
 
 # Create your views here.
 
@@ -206,14 +207,45 @@ class UploadDataView(LoginRequiredMixin, View):
         input_files = data.getlist("input_files", None)
         output_file = data.get("output_file", None)
 
+        if not input_files or not output_file:
+            return JsonResponse(data='Data not provided', status=403, safe=False)
+
         output_file_ins = OutputFileUpload.objects.create(
             file = output_file,
         )
 
+        input_file_instances = []
+        output_file_path = f"{settings.BASE_DIR}{output_file_ins.file.url}"
+
         for file in input_files:
-            InputFileUpload.objects.create(
+            input_file = InputFileUpload.objects.create(
                 user = request.user,
                 input_file = file,
                 output_file = output_file_ins,
             )
+            input_file_instances.append(input_file)
+
+        processed_files = upload_file_process.start_process(input_file_instances, output_file_ins)
+
         return JsonResponse(data='', status=200, safe=False)
+
+
+class UserProcessedFileView(LoginRequiredMixin, View):
+
+    def get(self, request):
+        processed_files = ProcessedFile.get_files_by_user(request.user)
+        context = {
+            'processed_files': processed_files.order_by("-date_created"),
+        }
+        return render(request, "core/my_processed_files.html", context)
+
+    def post(self, request):
+        path = request.POST.get("path", '')
+        file_path = os.path.join(settings.MEDIA_ROOT, path)
+        file_path_abs = f"{settings.BASE_DIR}{file_path}"
+        if os.path.exists(file_path_abs):
+            with open(file_path_abs, 'rb') as fh:
+                response = HttpResponse(fh.read(), content_type="application/pdf")
+                response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
+                return response
+        raise Http404()

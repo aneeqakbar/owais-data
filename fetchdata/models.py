@@ -1,3 +1,5 @@
+import os
+from urllib.parse import urlparse
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -32,3 +34,25 @@ class InputFileUpload(models.Model):
     input_file = models.FileField(upload_to='documents/input_files/%Y/%m/%d/')
     output_file = models.ForeignKey(OutputFileUpload, on_delete=models.CASCADE, related_name="input_files")
     date_created = models.DateTimeField(auto_now_add=True)
+
+    @staticmethod
+    def get_file_by_output(output_ins):
+        return InputFileUpload.objects.filter(output_file = output_ins).first()
+
+class ProcessedFile(models.Model):
+    input_file = models.OneToOneField(InputFileUpload, on_delete=models.CASCADE, related_name="processed_file")
+    processed_file = models.FileField(upload_to='documents/processed/%Y/%m/%d/')
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    @staticmethod
+    def get_files_by_user(user):
+        return ProcessedFile.objects.filter(input_file__user = user)
+
+    @property
+    def get_name(self):
+        return os.path.basename(self.processed_file.url)
+
+    @property
+    def get_input_name(self):
+        return os.path.basename(self.input_file.input_file.url)
+
