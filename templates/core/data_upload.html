@@ -211,18 +211,23 @@
     const fileForm = document.getElementById("file-form");
   
     $("#file-form").submit(function(e) {
-        e.preventDefault();    
+        e.preventDefault();
         var formData = new FormData(this);
-    
+
+        handleLoading("Processing Files", status=true)
+
         $.ajax({
             url: window.location.pathname,
             type: 'POST',
             data: formData,
             success: function (res, textStatus, xhr) {
-                if (xhr.status == 200){
-                    handleLoading("Processing Files")
-                    window.location.href = "{% url 'fetchdata:UserProcessedFileView' %}"
-                }
+              handleLoading("", status=false)
+              if (xhr.status == 200){
+                window.location.href = "{% url 'fetchdata:UserProcessedFileView' %}"
+              }
+            },
+            error: function (res, textStatus, xhr) {
+              handleLoading("", status=false)
             },
             cache: false,
             contentType: false,
@@ -273,15 +278,13 @@
     }
 
     const loader = document.getElementById("generic-loader")
-    function handleLoading(text){
-        loader.getElementsByClassName("text-msg")[0].innerText = text
-        setTimeout(() => {
-            loader.classList.toggle("hidden", false);
-        }, 200);
+    function handleLoading(text, status=false){
+      loader.getElementsByClassName("text-msg")[0].innerText = text
+      loader.classList.toggle("hidden", !status);
 
-        to = setTimeout(() => {
-            loader.classList.toggle("hidden", true);
-        }, 3000);
+      {% comment %} to = setTimeout(() => {
+          loader.classList.toggle("hidden", true);
+      }, 3000); {% endcomment %}
     }
 </script>
 

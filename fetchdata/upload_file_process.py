@@ -395,5 +395,5 @@ def start_process(inputFiles, output_ins):
         )
         processed_files.append(processed_file)
 
-        return processed_files
+    return processed_files
 
