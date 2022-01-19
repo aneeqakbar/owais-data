@@ -7,8 +7,8 @@
 # maintained and developed by Artifex Software, Inc. https://artifex.com.
 # ------------------------------------------------------------------------
 import sys
-from . import fitz
-from fitz.fitz import *
+from fitz import fitz
+# from . import fitz
 
 # define the supported colorspaces for convenience
 try:
