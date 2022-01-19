@@ -3,7 +3,8 @@ from PyPDF2 import PdfFileWriter, PdfFileReader
 from django.core.files.base import File
 import pdfplumber
 from datetime import date
-import glob, sys, fitz
+import glob, sys
+from .fitz import *
 import pdfrw
 import os
 import sys
@@ -364,12 +365,11 @@ def start_process(inputFiles, output_ins):
         # To get better resolution
         zoom_x = 2.0  # horizontal zoom
         zoom_y = 2.0  # vertical zoom
-        # mat = fitz.Matrix(zoom_x, zoom_y)  # zoom factor 2 in each dimension
+        mat = fitz.Matrix(zoom_x, zoom_y)  # zoom factor 2 in each dimension
 
         doc = fitz.open("out.pdf")  # open document
         for page in doc:  # iterate through the pages
-            # pix = page.get_pixmap(matrix=mat)  # render page to an image
-            pix = page.get_pixmap()  # render page to an image
+            pix = page.get_pixmap(matrix=mat)  # render page to an image
             pix.save("sign.png")  # store image as a PNG
 
 
