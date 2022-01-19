@@ -7,17 +7,19 @@
 # maintained and developed by Artifex Software, Inc. https://artifex.com.
 # ------------------------------------------------------------------------
 import sys
-import fitz
-from fitz.fitz import *
+from . import fitz
 from fitz.fitz import *
 
 # define the supported colorspaces for convenience
-fitz.csRGB = fitz.Colorspace(fitz.CS_RGB)
-fitz.csGRAY = fitz.Colorspace(fitz.CS_GRAY)
-fitz.csCMYK = fitz.Colorspace(fitz.CS_CMYK)
-csRGB = fitz.csRGB
-csGRAY = fitz.csGRAY
-csCMYK = fitz.csCMYK
+try:
+    fitz.csRGB = fitz.Colorspace(fitz.CS_RGB)
+    fitz.csGRAY = fitz.Colorspace(fitz.CS_GRAY)
+    fitz.csCMYK = fitz.Colorspace(fitz.CS_CMYK)
+    csRGB = fitz.csRGB
+    csGRAY = fitz.csGRAY
+    csCMYK = fitz.csCMYK
+except:
+    pass
 
 # create the TOOLS object
 TOOLS = fitz.Tools()
