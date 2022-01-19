@@ -9,6 +9,7 @@
 import sys
 import fitz
 from fitz.fitz import *
+from fitz.fitz import *
 
 # define the supported colorspaces for convenience
 fitz.csRGB = fitz.Colorspace(fitz.CS_RGB)
