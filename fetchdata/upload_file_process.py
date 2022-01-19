@@ -4,7 +4,6 @@ from django.core.files.base import File
 import pdfplumber
 from datetime import date
 import glob, sys, fitz
-# from .fitz import *
 import pdfrw
 import os
 import sys

@@ -41,12 +41,12 @@ pdfrw==0.4
 pep517==0.12.0
 Pillow==9.0.0
 pip-tools==6.4.0
+pkg_resources==0.0.0
 prov==2.0.0
 psycopg2==2.9.3
 pycparser==2.21
 pycrypto==2.6.1
 pydot==1.4.2
-MuPDF<=1.19.0
 PyMuPDF==1.19.4
 pyparsing==3.0.6
 PyPDF2==1.26.0
