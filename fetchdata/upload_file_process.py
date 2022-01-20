@@ -3,8 +3,7 @@ from PyPDF2 import PdfFileWriter, PdfFileReader
 from django.core.files.base import File
 import pdfplumber
 from datetime import date
-import glob, sys
-from .fitz import *
+import glob, sys, fitz
 import pdfrw
 import os
 import sys

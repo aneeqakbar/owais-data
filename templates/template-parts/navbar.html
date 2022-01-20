@@ -33,12 +33,12 @@
             <a class="nav-link" href="{% url 'users:RegisterView' %}">Sign Up</a>
           </li>
         {% else %}
-          <li class="nav-item mx-3">
+          {% comment %} <li class="nav-item mx-3">
             <a class="nav-link" href="{% url 'fetchdata:UploadDataView' %}">Data Upload</a>
           </li>
           <li class="nav-item mx-3">
             <a class="nav-link" href="{% url 'fetchdata:UserProcessedFileView' %}">My Processed Files</a>
-          </li>
+          </li> {% endcomment %}
           <li class="nav-item mx-3">
             <a class="nav-link" href="{% url 'users:ProfileView' %}">Profile</a>
           </li>

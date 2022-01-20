@@ -98,7 +98,8 @@ class SheetDataView(View):
             elif scrap_opt == "add_remove":
                 pass
             elif scrap_opt == "custom_bot":
-                pass
+                return redirect("fetchdata:UploadDataView")
+                return redirect("fetchdata:UserProcessedFileView")
 
             raise Http404()
 
