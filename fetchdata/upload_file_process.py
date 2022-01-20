@@ -67,13 +67,13 @@ class ProcessPdf:
 
 
 def start_process(inputFiles, output_ins):
-    # # Input files path will be given here
-    # print("started")
-    # print("input got:", inputFiles)
-    # # inputFiles = []
-    # # for name in glob.glob('Input/*'):
-    # #     inputFiles.append(name)
-    # output_format = f"{settings.BASE_DIR}{output_ins.file.url}"
+    # Input files path will be given here
+    print("started")
+    print("input got:", inputFiles)
+    # inputFiles = []
+    # for name in glob.glob('Input/*'):
+    #     inputFiles.append(name)
+    output_format = f"{settings.BASE_DIR}{output_ins.file.url}"
     processed_files = []
 
     for input_file in inputFiles:
@@ -144,8 +144,7 @@ def start_process(inputFiles, output_ins):
     #             except:
     #                 print("An exception occured when extracting City in your file.", OldPdfName )
     #                 City = ""
-                    
-                    
+
     #             try:
     #                 Email = CityEmailOwnershipLine.split("of Ownership: ")[0].split(":")[1].replace("Length","")
     #             except:
@@ -387,7 +386,7 @@ def start_process(inputFiles, output_ins):
         # file_handle.save(OutputFile_absolute_path)
 
         # Processor = ProcessPdf(OutputFile_absolute_path)
-        # Processor.add_data_to_pdf(OutputFile_absolute_path, data)
+        # # Processor.add_data_to_pdf(OutputFile_absolute_path, data)
 
         processed_file = ProcessedFile.objects.create(
             input_file = input_file,
