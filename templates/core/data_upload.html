@@ -174,10 +174,28 @@
                         </div>
                     </div>
                     <button class="btn btn-success mt-4" type="submit">Upload</button>
-                    <button class="btn btn-warning mt-4 hidden" type="button" id="process-btn">Process Files</button>
                     <a href="{% url 'fetchdata:UserProcessedFileView' %}" class="btn btn-primary mt-4">View Processed Files</a>
                     {% comment %} <button class="btn btn-success mt-4" onclick="handleLoading('Please Wait...')" type="button">Upload</button> {% endcomment %}
                 </form>
+            </div>
+        </div>
+
+        <div class="col-lg-12 card-margin mt-4 form-file-text-body hidden" id="uploaded-files-cont">
+            <div class="card p-5 mx-auto form-file-text">
+                <h2 style="color: var(--temp-primary);" class="fs-1 text-center mb-4">Uploaded Files</h2>
+
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Size</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                </table>
+                <button class="btn btn-warning mt-4 hidden" type="button" id="process-btn">Process Files</button>
             </div>
         </div>
     </div>
@@ -210,6 +228,25 @@
 
 
 <script>
+    function showUploadedFiles() {
+      $('#uploaded-files-cont')[0].classList.toggle("hidden", false);
+      var files = $('#inputFormFiles')[0].files;
+      let tableBody = $('.form-file-text-body').find(".table tbody")
+      
+      for (let i = 0; i < files.length; i++) {
+        let file = files[i];
+        let tableRows = $('.form-file-text-body').find(".table tbody tr")
+        tableBody.html(
+          tableBody.html() + `
+          <tr>
+            <th>${tableRows.length+1}</th>
+            <td>${file.name}</td>
+            <td>${file.size/1000} kB</td>
+          </tr>
+        `)
+      }
+    };
+
     const fileForm = document.getElementById("file-form");
     const processBtn = document.getElementById("process-btn");
   
@@ -227,6 +264,7 @@
             handleLoading("", status=false)
             if (xhr.status == 200){
               processBtn.classList.toggle('hidden', false)
+              showUploadedFiles()
               {% comment %} window.location.href = "{% url 'fetchdata:UserProcessedFileView' %}" {% endcomment %}
 
             }
