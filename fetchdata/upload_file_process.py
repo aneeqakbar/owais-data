@@ -338,7 +338,7 @@ def start_process(inputFiles, output_ins):
                 
             }
         print(data, '\n\n')
-        
+
         with open(OldPdfName, "rb") as in_f:
             input1 = PdfFileReader(in_f)
             output = PdfFileWriter()
