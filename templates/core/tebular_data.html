@@ -1,0 +1,231 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block ExtraCss %}
+  {% comment %} <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    #myInput {
+      background-image: url('/css/searchicon.png');
+      background-position: 10px 10px;
+      background-repeat: no-repeat;
+      width: 100%;
+      font-size: 16px;
+      padding: 12px 20px 12px 40px;
+      border: 1px solid #ddd;
+      margin-bottom: 12px;
+    }
+
+    #myTable {
+      border-collapse: collapse;
+      width: 100%;
+      border: 1px solid #ddd;
+      font-size: 18px;
+    }
+
+    #myTable th, #myTable td {
+      text-align: left;
+      padding: 12px;
+    }
+
+    #myTable tr {
+      border-bottom: 1px solid #ddd;
+    }
+
+    #myTable tr.header, #myTable tr:hover {
+      background-color: #f1f1f1;
+    }
+  </style> {% endcomment %}
+{% endblock ExtraCss %}
+
+{% block content %}
+
+{% block header %}
+{% endblock header %}
+
+<section class="container my-5">
+
+    <div class="row mb-3">
+        <div class="col-12">
+            <form method="GET">
+              {% comment %} cryptocurrency
+              ticker
+              order_by {% endcomment %}
+              <div class="row align-items-end">
+                <div class="col-4">
+                  <div id="div_crypto_currency" class="form-group">
+                      <label for="crypto_currency">Crypto Currency</label>
+                      <div>
+                          <input type="text" name="crypto_currency" class="textinput textInput form-control" id="id_cryptocurrency">
+                      </div>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div id="div_ticker" class="form-group">
+                      <label for="ticker">Ticker</label>
+                      <div>
+                          <input type="text" name="ticker" class="textinput textInput form-control" id="id_ticker">
+                      </div>
+                  </div>
+                </div>
+                {% comment %} <div class="col-4 text-center">
+                  <div id="div_{{filter_form.form.order_by.id_for_label}}" class="form-group">
+                      <label for="{{filter_form.form.order_by.id_for_label}}">{{filter_form.form.order_by.label}}</label>
+                      <div>
+                          {{filter_form.form.order_by}}
+                      </div>
+                  </div>
+                </div> {% endcomment %}
+                <div class="col-4 text-start">
+                  <button class="btn btn-primary" type="submit">Filter</button>
+                </div>
+              </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12" style="overflow-x: auto;">
+
+          <table class="table table-stripped" id="table">
+            <thead>
+                <tr class="header">
+                    <th style="min-width: 100px;">Cryptocurrency</th>
+                    <th style="min-width: 100px;">Ticker</th>
+                    <th style="min-width: 100px;" onclick="sortTable(2)" data-direction="asc">Yesterday Total</th>
+                    <th style="min-width: 100px;" onclick="sortTable(3)" data-direction="asc">Today Total</th>
+                    <th style="min-width: 100px;" onclick="sortTable(4)" data-direction="asc">Difference</th>
+                    <th style="min-width: 100px;" onclick="sortTable(5)" data-direction="asc">Yesterday Icospeaks</th>
+                    <th style="min-width: 100px;" onclick="sortTable(6)" data-direction="asc">Today Icospeaks</th>
+                    <th style="min-width: 100px;" onclick="sortTable(7)" data-direction="asc">Yesterday Cryptocom</th>
+                    <th style="min-width: 100px;" onclick="sortTable(8)" data-direction="asc">Today Cryptocom</th>
+                    <th style="min-width: 100px;" onclick="sortTable(9)" data-direction="asc">Yesterday Coinmarket</th>
+                    <th style="min-width: 100px;" onclick="sortTable(10)" data-direction="asc">Today Coinmarket</th>
+                    <th style="min-width: 130px;">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in data %}
+                <tr> 
+                    <td>{{entry.cryptocurrency}}</td>
+                    <td>{{entry.ticker}}</td>
+                    <td>{{entry.yesterday_total}}</td>
+                    <td>{{entry.today_total}}</td>
+                    <td>{{entry.difference}}</td>
+                    <td>{{entry.yesterday_icospeaks}}</td>
+                    <td>{{entry.today_icospeaks}}</td>
+                    <td>{{entry.yesterday_cryptocom}}</td>
+                    <td>{{entry.today_cryptocom}}</td>
+                    <td>{{entry.yesterday_coinmarket}}</td>
+                    <td>{{entry.today_coinmarket}}</td>
+                    <td>{{entry.date.date}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+
+        </div>
+        <div class="col-12">
+          <div class="pagination">
+            <span class="step-links">
+                {% if data.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ data.previous_page_number }}">previous</a>
+                {% endif %}
+        
+                <span class="current">
+                    Page {{ data.number }} of {{ data.paginator.num_pages }}.
+                </span>
+        
+                {% if data.has_next %}
+                    <a href="?page={{ data.next_page_number }}">next</a>
+                    <a href="?page={{ data.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+          </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
+
+{% block ExtraJs %}
+
+<script>
+  function handleSorting(elem){
+    console.log(elem)
+    
+  }
+</script>
+
+
+<script>
+  function sortTable(n) {
+      var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+      table = document.getElementById("table");
+      switching = true;
+      // Set the sorting direction to ascending:
+      dir = table.rows[0].getElementsByTagName("TH")[n].getAttribute("data-direction")
+      nextDir = dir == "asc" ? "desc" : "asc"
+      //dir = "asc";
+      /* Make a loop that will continue until
+      no switching has been done: */
+      while (switching) {
+        // Start by saying: no switching is done:
+        switching = false;
+        rows = table.rows;
+        //.getAttribute("data-direction");
+        /* Loop through all table rows (except the
+        first, which contains table headers): */
+        for (i = 1; i < (rows.length - 1); i++) {
+          // Start by saying there should be no switching:
+          shouldSwitch = false;
+          /* Get the two elements you want to compare,
+          one from current row and one from the next: */
+          x = rows[i].getElementsByTagName("TD")[n];
+          y = rows[i + 1].getElementsByTagName("TD")[n];
+          /* Check if the two rows should switch place,
+          based on the direction, asc or desc: */
+          if (dir == "asc") {
+            if (Number(x.innerHTML) > Number(y.innerHTML)) {
+              shouldSwitch = true;
+              break;
+            }
+            {% comment %}
+            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+              // If so, mark as a switch and break the loop:
+              shouldSwitch = true;
+              break;
+            }
+            {% endcomment %}
+          } else if (dir == "desc") {
+            if (Number(x.innerHTML) < Number(y.innerHTML)) {
+              shouldSwitch = true;
+              break;
+            }
+          }
+        }
+        if (shouldSwitch) {
+          /* If a switch has been marked, make the switch
+          and mark that a switch has been done: */
+          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+          switching = true;
+          // Each time a switch is done, increase this count by 1:
+          switchcount ++;
+        } else {
+          /* If no switching has been done AND the direction is "asc",
+          set the direction to "desc" and run the while loop again. */
+          if (switchcount == 0 && dir == "asc") {
+            dir = "desc";
+            switching = true;
+          }
+        }
+      }
+      table.rows[0].getElementsByTagName("TH")[n].setAttribute("data-direction", nextDir)
+  }
+</script>
+
+{% endblock ExtraJs %}

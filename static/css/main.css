@@ -1,0 +1,60 @@
+/* DEFAULTS */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.a-no-style {
+    color: inherit;
+    text-decoration: none;
+}
+
+.a-no-style:hover {
+    text-decoration: none;
+}
+
+.btn-no-style {
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.show {
+    display: block !important;
+}
+
+#message-area {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    background-color: #383838;
+    border-left: 3px solid #0d6efd;
+    min-width: 200px;
+    height: 30px;
+    color: #fff;
+    padding: 0px 10px;
+    animation: notification-slide-in .2s ease;
+}
+
+#message-area #text-content {
+    margin: 0;
+}
+
+@keyframes notification-slide-in {
+    0% {
+        bottom: -20px;
+    }
+    100% {
+        bottom: 20px;
+    }
+}

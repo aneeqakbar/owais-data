@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block ExtraCss %}
+  {% comment %} <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    #myInput {
+      background-image: url('/css/searchicon.png');
+      background-position: 10px 10px;
+      background-repeat: no-repeat;
+      width: 100%;
+      font-size: 16px;
+      padding: 12px 20px 12px 40px;
+      border: 1px solid #ddd;
+      margin-bottom: 12px;
+    }
+
+    #myTable {
+      border-collapse: collapse;
+      width: 100%;
+      border: 1px solid #ddd;
+      font-size: 18px;
+    }
+
+    #myTable th, #myTable td {
+      text-align: left;
+      padding: 12px;
+    }
+
+    #myTable tr {
+      border-bottom: 1px solid #ddd;
+    }
+
+    #myTable tr.header, #myTable tr:hover {
+      background-color: #f1f1f1;
+    }
+  </style> {% endcomment %}
+{% endblock ExtraCss %}
+
+{% block content %}
+
+{% block header %}
+{% endblock header %}
+
+<section class="container my-5">
+
+    <div class="row">
+        <div class="col-12" style="overflow-x: auto;">
+
+          <table class="table table-stripped" id="table">
+            <thead>
+                <tr class="header">
+                  <th>FileName</th>
+                  <th>Date Processed</th>
+                  <th>Download</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for file in processed_files %}
+                <tr> 
+                  <td>{{file.get_input_name}}</td>
+                  <td>{{file.date_created}}</td>
+                  <td>
+                    <form action="." method="POST">
+                      {% csrf_token %}
+                      <input type="hidden" name="path" value="{{file.processed_file.url}}">
+                      <button class="btn btn-warning btn-sm" type="submit">Download</button>
+                    </form>
+                  </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
+
+{% block ExtraJs %}
+
+
+{% endblock ExtraJs %}
