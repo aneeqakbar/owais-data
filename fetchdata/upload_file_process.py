@@ -384,6 +384,8 @@ def start_process(inputFiles, output_ins):
                     fitz.Rect(162, 705,275, 745),
                     filename=image
                 )
+        __file = open(OutputFile_absolute_path, "w+")
+        __file.close()
         file_handle.save(OutputFile_absolute_path)
 
         Processor = ProcessPdf(OutputFile_absolute_path)
